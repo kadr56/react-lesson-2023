@@ -6,6 +6,7 @@ import Product4 from './Product4'
 import ProductFunc1 from './ProductFunc1'
 import ProductFunc2 from './ProductFunc2'
 import ProductFunc3 from './ProductFunc3'
+import ProductFunc4 from './ProductFunc4'
 
 import './App.css';
 

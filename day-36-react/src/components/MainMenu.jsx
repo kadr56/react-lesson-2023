@@ -19,7 +19,7 @@ export default function MainMenu() {
         <div>
             <div>Here is the main menu</div>
 
-            <Navbar bg="light" expand='lg'>
+            <Navbar bg="light" >
                 {subMenus}
             </Navbar>
 

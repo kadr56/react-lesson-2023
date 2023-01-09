@@ -25,6 +25,7 @@ function App() {
       submitterAvatarUrl={product.submitterAvatarUrl}
       votes={product.votes}
       url={product.url}
+      id={product.id}
     />
   })
 
@@ -37,6 +38,7 @@ function App() {
       submitterAvatarUrl={product.submitterAvatarUrl}
       votes={product.votes}
       url={product.url}
+      id={product.id}
     />
   })
 

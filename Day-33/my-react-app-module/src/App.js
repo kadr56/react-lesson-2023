@@ -26,6 +26,7 @@ function App() {
       votes={product.votes}
       url={product.url}
       id={product.id}
+      stars={product.stars}
     />
   })
 
@@ -39,6 +40,7 @@ function App() {
       votes={product.votes}
       url={product.url}
       id={product.id}
+      stars={product.stars}
     />
   })
 

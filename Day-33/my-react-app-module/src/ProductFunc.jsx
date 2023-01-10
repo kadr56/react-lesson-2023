@@ -1,15 +1,51 @@
 
-
+import { useState } from 'react'
+import products from './seed'
+import { Rating } from 'react-simple-star-rating'
 
 function ProductFunc(props) {
-    console.log(props)
+    // console.log(props)
+
+
+    const [votes, setVotes] = useState(props.votes)
+    const [stars, setStars] = useState(props.stars)
 
     function handleUpVote(props) {
-        console.log("Upvoted")
-        // let a = props.votes + 1
-        // console.log(a);
-        console.log(props.id)
+
+        setVotes(votes + 1)
+        // setVotes(stars + 1)
+        if (stars >= 10) {
+            setStars(10);
+        } else {
+            setStars(stars + 1)
+        }
+
+
+        // let newProducts = [];
+
+        // const foundProduct = products.map(product => {
+        //     if (product.id == props.id) {
+        //         product.votes = product.votes + 1
+        //     }
+        //     return product
+        // })
+        // // console.log('votes=' + foundProduct[0].votes)
+        // // foundProduct[0].votes++
+        // console.log(foundProduct)
+
+
     }
+
+    function handleDownVote(props) {
+        setVotes(votes - 1)
+
+        if (stars <= 0) {
+            setStars(0);
+        } else {
+            setStars(stars - 1)
+        }
+    }
+
 
 
     return (
@@ -18,10 +54,13 @@ function ProductFunc(props) {
             <img src={props.productImageUrl} className='App-logo' alt="logo" />
             <div className='text'>
                 <h4 className='title'>
-                    <a href="#" onClick={() => handleUpVote(props)}>
+                    <a onClick={() => handleUpVote(props)}>
                         <i className="bi bi-caret-up-fill"></i>
                     </a>
-                    {props.votes}
+                    {votes}
+                    <a onClick={() => handleDownVote(props)}>
+                        <i className="bi bi-caret-down-fill"></i>
+                    </a>
                 </h4>
                 <a href={props.url}> {props.title}</a>
                 <p>{props.description}</p>
@@ -31,6 +70,10 @@ function ProductFunc(props) {
                     </p>
                     <img src={props.submitterAvatarUrl}></img>
                 </div>
+                <Rating
+                    initialValue={stars}
+                    size={25}
+                    iconsCount={10} />
             </div>
 
             {/* <p> {props.title}</p> */}

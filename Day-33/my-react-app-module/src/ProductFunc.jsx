@@ -7,12 +7,12 @@ function ProductFunc(props) {
     // console.log(props)
 
 
-    const [votes, setVotes] = useState(props.votes)
+    // const [votes, setVotes] = useState(props.votes)
     const [stars, setStars] = useState(props.stars)
 
     function handleUpVote(props) {
 
-        setVotes(votes + 1)
+        // setVotes(votes + 1)
         // setVotes(stars + 1)
         if (stars >= 10) {
             setStars(10);
@@ -37,7 +37,7 @@ function ProductFunc(props) {
     }
 
     function handleDownVote(props) {
-        setVotes(votes - 1)
+        // setVotes(votes - 1)
 
         if (stars <= 0) {
             setStars(0);
@@ -54,10 +54,11 @@ function ProductFunc(props) {
             <img src={props.productImageUrl} className='App-logo' alt="logo" />
             <div className='text'>
                 <h4 className='title'>
-                    <a onClick={() => handleUpVote(props)}>
+                    <a onClick={() => props.onVote(props.id)}>
                         <i className="bi bi-caret-up-fill"></i>
                     </a>
-                    {votes}
+                    {/* {votes} */}
+                    {props.votes}
                     <a onClick={() => handleDownVote(props)}>
                         <i className="bi bi-caret-down-fill"></i>
                     </a>

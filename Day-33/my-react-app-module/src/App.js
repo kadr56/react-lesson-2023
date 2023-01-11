@@ -1,13 +1,7 @@
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import Product1 from './Product1'
-// import Product2 from './Product2'
-// import Product3 from './Product3'
-// import Product4 from './Product4'
-// import ProductFunc1 from './ProductFunc1'
-// import ProductFunc2 from './ProductFunc2'
-// import ProductFunc3 from './ProductFunc3'
-// import ProductFunc4 from './ProductFunc4'
 
+import { useState } from 'react'
 import ProductFunc from './ProductFunc';
 import products from './seed';
 
@@ -16,7 +10,38 @@ import './App.css';
 
 function App() {
 
-  const productList = products.map((product) => {
+  const [productList, setProductList] = useState(products)
+
+
+  function handleProductUpVote(productId) {
+    // console.log('UpVoted ID = ', productId)
+    // const foundProduct = products.filter(product => {
+    //   if (product.id == productId) {
+    //     return product
+    //   }
+    // })
+    // console.log(products)
+
+    // console.log(foundProduct[0].votes)
+    // foundProduct[0].votes = foundProduct[0].votes + 1;
+    // console.log(foundProduct[0].votes)
+
+    // Change votes in product Array
+
+    const newProducts = productList.map(product => {
+      if (product.id == productId) {
+        return Object.assign({}, product, {
+          votes: product.votes + 1
+        })
+      } else {
+        return product
+      }
+    })
+    console.log(newProducts)
+    setProductList(newProducts)
+  }
+
+  const productComponent = productList.map((product) => {
     // console.log(product)
     return <ProductFunc
       title={product.title}
@@ -27,20 +52,7 @@ function App() {
       url={product.url}
       id={product.id}
       stars={product.stars}
-    />
-  })
-
-  const productList2 = products.map((product) => {
-    // console.log(product)
-    return <Product1
-      title={product.title}
-      description={product.description}
-      productImageUrl={product.productImageUrl}
-      submitterAvatarUrl={product.submitterAvatarUrl}
-      votes={product.votes}
-      url={product.url}
-      id={product.id}
-      stars={product.stars}
+      onVote={handleProductUpVote}
     />
   })
 
@@ -48,7 +60,7 @@ function App() {
     <div className="app">
 
       {/* Function component */}
-      {productList}
+      {productComponent}
 
       {/* Class component*/}
       {/* {productList2} */}

@@ -41,6 +41,28 @@ function App() {
     setProductList(newProducts)
   }
 
+
+  function handleProductDownVote(productId) {
+
+    const newProducts = productList.map(product => {
+      if (product.id == productId) {
+
+        const newVotes = product.votes - 1;
+        product.votes = newVotes;
+        return product;
+
+        // return Object.assign({}, product, {
+        //   votes: product.votes - 1
+        // })
+
+      } else {
+        return product
+      }
+    })
+    console.log(newProducts)
+    setProductList(newProducts)
+  }
+
   const productComponent = productList.map((product) => {
     // console.log(product)
     return <ProductFunc
@@ -53,6 +75,7 @@ function App() {
       id={product.id}
       stars={product.stars}
       onVote={handleProductUpVote}
+      downVote={handleProductDownVote}
     />
   })
 

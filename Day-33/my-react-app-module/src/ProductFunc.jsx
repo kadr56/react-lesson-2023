@@ -59,7 +59,7 @@ function ProductFunc(props) {
                     </a>
                     {/* {votes} */}
                     {props.votes}
-                    <a onClick={() => handleDownVote(props)}>
+                    <a onClick={() => props.downVote(props.id)}>
                         <i className="bi bi-caret-down-fill"></i>
                     </a>
                 </h4>

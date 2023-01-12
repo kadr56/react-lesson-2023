@@ -17,6 +17,9 @@ function App() {
   return (
     <div className="App">
       <h1> Day 41 </h1>
+
+
+      {/* Exercise 1 */}
       <div style={{ margin: "30px" }}>
         <button onClick={handleClick}>
           Counter +1
@@ -26,13 +29,8 @@ function App() {
         </p>
       </div>
 
-
-
-      <br />
-      <br />
-      <br />
-      <br />
-      <div style={{ margin: "30px" }}>
+      {/* Exercise 2 */}
+      <div style={{ margin: "50px" }}>
         <input onChange={handleInput}>
         </input>
         <p >

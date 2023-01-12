@@ -6,7 +6,7 @@ function App() {
   const [counter, setCounter] = useState(0);
   const [inputText, setInputText] = useState("");
 
-  function handleClick() {
+  const handleClick = () => {
     setCounter(counter + 1)
   }
 
@@ -31,7 +31,7 @@ function App() {
 
       {/* Exercise 2 */}
       <div style={{ margin: "50px" }}>
-        <input onChange={handleInput}>
+        <input onChange={(e) => { handleInput(e) }}>
         </input>
         <p >
           Message: {inputText}

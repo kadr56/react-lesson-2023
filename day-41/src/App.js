@@ -2,6 +2,11 @@ import logo from './logo.svg';
 import { useState } from 'react';
 import './App.css';
 
+import Counter from './components/Counter'
+import UpdateArrays from './components/UpdateArrays';
+import SpreadArray from './components/SpreadArray'
+import UpdatingObjects from './components/UpdatingObjects';
+
 function App() {
   const [counter, setCounter] = useState(0);
   const [inputText, setInputText] = useState("");
@@ -13,6 +18,8 @@ function App() {
   function handleInput(event) {
     setInputText(event.target.value);
   }
+
+
 
   return (
     <div className="App">
@@ -37,6 +44,12 @@ function App() {
           Message: {inputText}
         </p>
       </div>
+
+      <Counter />
+      <SpreadArray />
+      {/* <UpdateArrays /> */}
+      <UpdatingObjects />
+
 
 
 

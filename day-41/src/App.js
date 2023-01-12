@@ -6,6 +6,7 @@ import Counter from './components/Counter'
 import UpdateArrays from './components/UpdateArrays';
 import SpreadArray from './components/SpreadArray'
 import UpdatingObjects from './components/UpdatingObjects';
+import Exercises from './components/Exercises';
 
 function App() {
   const [counter, setCounter] = useState(0);
@@ -23,10 +24,8 @@ function App() {
 
   return (
     <div className="App">
-      <h1> Day 41 </h1>
+      {/* <h1> Day 41 </h1>
 
-
-      {/* Exercise 1 */}
       <div style={{ margin: "30px" }}>
         <button onClick={handleClick}>
           Counter +1
@@ -36,7 +35,7 @@ function App() {
         </p>
       </div>
 
-      {/* Exercise 2 */}
+
       <div style={{ margin: "50px" }}>
         <input onChange={(e) => { handleInput(e) }}>
         </input>
@@ -47,8 +46,11 @@ function App() {
 
       <Counter />
       <SpreadArray />
-      {/* <UpdateArrays /> */}
-      <UpdatingObjects />
+      <UpdateArrays />
+      <UpdatingObjects /> */}
+
+
+      <Exercises />
 
 
 

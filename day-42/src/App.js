@@ -30,6 +30,9 @@ function App() {
 
   return (
     <div className="App">
+
+
+
       <form action="submit" className='myForms' onSubmit={handleRegister}>
         <div>
           <label>First Name: </label>

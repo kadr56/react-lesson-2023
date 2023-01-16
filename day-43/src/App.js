@@ -6,7 +6,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import About from './components/About';
 import Home from './components/Home';
-import { Routes, Route } from 'react-router-dom'
+import { Link, Routes, Route } from 'react-router-dom'
 import Test from './components/Test'
 import Usukhuu from './components/about/Usukhuu';
 import Khangai from './components/about/Khangai';
@@ -18,12 +18,12 @@ function App() {
       <h1 style={{ textAlign: "center", backgroundColor: "gray" }}>Day-43 - React Routes</h1>
 
       <div id='navbar'>
-        <a href="/"> Home</a>
-        <a href="/about"> About</a>
-        <a href="/about/test"> About Test</a>
-        <a href="/login"> LOGIN</a>
-        <a href="/register"> Register</a>
-        <a href="/feedback"> Feedback</a>
+        <Link to={'/'}> Home</Link >
+        <Link to={"/about"}> About</Link>
+        <Link to={"/about/test"}> About Test</Link>
+        <Link to={"/login"}> LOGIN</Link>
+        <Link to={"/register"}> Register</Link>
+        <Link to={"/feedback"}> Feedback</Link>
       </div>
 
       <Routes>
@@ -37,7 +37,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/feedback" element={<FeedbackForm />}></Route>
-        <Route path="*" element={<NotFound />}></Route>
+        <Route path="/*" element={<NotFound />}></Route>
       </Routes>
 
     </div >

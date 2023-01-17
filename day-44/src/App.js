@@ -8,6 +8,9 @@ import HomePage from './components/HomePage'
 import AboutPage from './components/AboutPage'
 import Movies from './components/Movies'
 import Movie from './components/Movie';
+import GalleryPage from './components/GalleryPage';
+import ToasterPage from './components/ToasterPage';
+
 
 
 function App() {
@@ -21,8 +24,10 @@ function App() {
         <Route path="/accordion" element={<Accordion />}></Route>
         <Route path="/home" element={<HomePage />}></Route>
         <Route path="/about" element={<AboutPage />}></Route>
+        <Route path="/gallery" element={<GalleryPage />}></Route>
         <Route path="/movies" element={<Movies />}></Route>
         <Route path="/movie/:id" element={<Movie />}></Route>
+        <Route path="/toaster" element={<ToasterPage />}></Route>
       </Routes>
 
 

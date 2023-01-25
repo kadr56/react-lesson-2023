@@ -1,8 +1,9 @@
 import { useState } from "react";
-import Timer from "./Timer";
-import TimerForm from "./TimerForm";
+import TimerForm from "./TimerForm.jsx";
+import Timer from "./Timer.jsx";
 
 export default function EditableTimer({
+  onFormSubmit,
   id,
   title,
   project,
@@ -10,13 +11,41 @@ export default function EditableTimer({
   runningSince,
   onTrashClick,
   onStartClick,
+  onStopClick,
 }) {
-  const [editOpenForm, setEditOpenForm] = useState(false);
-  console.log(id);
+  const [editFormOpen, setEditFormOpen] = useState(false);
+
+  function handleFormClose() {
+    closeForm();
+  }
+
+  function handleEditClick() {
+    openForm();
+  }
+
+  function handleSubmit(timer) {
+    onFormSubmit(timer);
+    closeForm();
+  }
+
+  function closeForm() {
+    setEditFormOpen(false);
+  }
+
+  function openForm() {
+    setEditFormOpen(true);
+  }
+
   return (
     <div>
-      {editOpenForm ? (
-        <TimerForm id={id} title={title} project={project} />
+      {editFormOpen ? (
+        <TimerForm
+          id={id}
+          title={title}
+          project={project}
+          onFormSubmit={handleSubmit}
+          onFormClose={handleFormClose}
+        />
       ) : (
         <Timer
           id={id}
@@ -26,6 +55,8 @@ export default function EditableTimer({
           runningSince={runningSince}
           onTrashClick={onTrashClick}
           onStartClick={onStartClick}
+          onEditClick={handleEditClick}
+          onStopClick={onStopClick}
         />
       )}
     </div>

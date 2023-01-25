@@ -1,20 +1,46 @@
-import Timer from "./Timer";
-import timerData from "../data/data";
 import { useEffect, useState } from "react";
-import TimerForm from "./TimerForm";
-import EditableTimerList from "./EditableTImerList";
-export default function TimerDashboard() {
+import projects from "../data/data.js";
+import { newTimer } from "../timercomponent/Helpers";
+import EditableTimerList from "./EditableTimerList";
+import ToggleableTimerForm from "./ToggleableTimerForm.jsx";
+
+export default function TimersDashboard() {
   const [timers, setTimers] = useState({ timers: [] });
 
-  useEffect(() => {
-    setInterval(() => setTimers({ timers: timerData }), 1000);
-  }, []);
+  function handleCreateFormSubmit(timer) {
+    console.log(timer);
+    createTimer(timer);
+  }
+
+  function handleEditFormSubmit(attrs) {
+    updateTimer(attrs);
+  }
+
+  function handleTrashClick(timerId) {
+    deleteTimer(timerId);
+  }
+
+  function handleStartClick(timerId) {
+    startTimer(timerId);
+  }
+
+  function handleStopClick(timerId) {
+    stopTimer(timerId);
+  }
+
+  function createTimer(timer) {
+    const t = newTimer(timer);
+    console.log(timers);
+    setTimers({ timers: timers.timers.concat(t) });
+    console.log(timers);
+  }
 
   function startTimer(timerId) {
     const now = Date.now();
     setTimers({
       timers: timers.timers.map((timer) => {
         if (timer.id === timerId) {
+          console.log(timer);
           timer.runningSince = now;
           return timer;
         } else {
@@ -23,8 +49,32 @@ export default function TimerDashboard() {
       }),
     });
   }
-  function handleTrashClick(timerId) {
-    deleteTimer(timerId);
+
+  function stopTimer(timerId) {
+    const now = Date.now();
+
+    setTimers({
+      timers: timers.timers.map((timer) => {
+        if (timer.id === timerId) {
+          const lastElapsed = now - timer.runningSince;
+          timer.elapsed = timer.elapsed + lastElapsed;
+          timer.runningSince = null;
+        }
+        return timer;
+      }),
+    });
+  }
+
+  function updateTimer(attrs) {
+    setTimers({
+      timers: timers.timers.map((timer) => {
+        if (timer.id === attrs.id) {
+          timer.title = attrs.title;
+          timer.project = attrs.project;
+        }
+        return timer;
+      }),
+    });
   }
 
   function deleteTimer(timerId) {
@@ -33,9 +83,9 @@ export default function TimerDashboard() {
     });
   }
 
-  function handleStartClick(timerId) {
-    startTimer(timerId);
-  }
+  useEffect(() => {
+    setInterval(() => setTimers({ timers: projects }), 1000);
+  }, []);
 
   return (
     <div>
@@ -44,9 +94,12 @@ export default function TimerDashboard() {
         <div>
           <EditableTimerList
             timers={timers.timers}
+            onFormSubmit={handleEditFormSubmit}
             onTrashClick={handleTrashClick}
             onStartClick={handleStartClick}
+            onStopClick={handleStopClick}
           />
+          <ToggleableTimerForm onFormSubmit={handleCreateFormSubmit} />
         </div>
       )}
     </div>

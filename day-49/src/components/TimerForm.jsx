@@ -1,5 +1,6 @@
 import { Card, CardContent, Grid, Button, TextField } from "@mui/material";
 import { useState } from "react";
+
 export default function TimerForm({
   id,
   title,
@@ -15,14 +16,13 @@ export default function TimerForm({
   const submitText = id ? "Update" : "Create";
 
   function handleTitleChange(e) {
-    console.log(e.target.value);
     setTimer({
       ...timer,
       title: e.target.value,
     });
   }
 
-  function handleProjectTitle(e) {
+  function handleProjectChange(e) {
     setTimer({
       ...timer,
       project: e.target.value,
@@ -52,11 +52,11 @@ export default function TimerForm({
                   <TextField
                     type="text"
                     placeholder={timer.project}
-                    label={"project"}
+                    label={"Project"}
                     value={timer.project}
                     variant={"outlined"}
                     fullWidth={true}
-                    onChange={handleProjectTitle}
+                    onChange={handleProjectChange}
                   />
                 </Grid>
                 <Grid item xs={12}>

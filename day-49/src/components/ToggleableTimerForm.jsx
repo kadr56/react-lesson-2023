@@ -1,12 +1,13 @@
-import TimerForm from "./TimerForm";
 import { useState } from "react";
-export default function ToggleableTimerForm() {
+import TimerForm from "./TimerForm";
+
+export default function ToggleableTimerForm({ onFormSubmit }) {
   const [isOpen, setIsOpen] = useState(false);
 
   function handleFormSubmit(timer) {
+    onFormSubmit(timer);
     setIsOpen(false);
   }
-
   function handleFormOpen() {
     setIsOpen(true);
   }

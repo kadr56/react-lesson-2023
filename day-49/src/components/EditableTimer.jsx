@@ -18,7 +18,6 @@ export default function EditableTimer({
   function handleFormClose() {
     closeForm();
   }
-
   function handleEditClick() {
     openForm();
   }

@@ -38,7 +38,7 @@ app.post("/data", (request, response) => {
     name: request.body.name,
     major: request.body.major,
   };
-  data.push(newData);
+  data = [...data, newData];
   response.json(data);
 });
 
@@ -48,6 +48,31 @@ app.delete("/data", (request, response) => {
   data = newData;
   console.log(newData);
   response.json(newData);
+});
+
+app.put("/data", (request, response) => {
+  console.log(request.body);
+
+  // Medhod 1
+  // const newData = data.filter((a) => a.id !== request.body.id);
+  // data = [...newData, request.body];
+
+  // Medhod 2
+  data = data.map((d) => {
+    if (d.id === request.body.id) {
+      console.log("FOUND");
+      // d = { ...d, name: request.body.name };
+      // d = { ...d, major: request.body.major };
+
+      d.name = request.body.name;
+      d.major = request.body.major;
+    }
+    return d;
+  });
+
+  // data = newData;
+  console.log(data);
+  response.json(data);
 });
 
 app.listen(PORT, () => {

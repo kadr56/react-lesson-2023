@@ -1,0 +1,19 @@
+h1,h3 {
+ text-align: center;
+}
+form {
+  max-width: 350px;
+  align-items: center;
+  display: flex;
+  margin: 0 auto;  flex-direction: column;
+
+}
+
+.user-list {
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+/* padding: 10px; */
+border: 1px solid #ddd;
+}

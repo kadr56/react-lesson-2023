@@ -3,8 +3,18 @@ import { useEffect, useState } from "react";
 
 function App() {
   const URL = "http://localhost:8080/users";
+  const newUser = {
+    id: "",
+    username: "",
+    age: "",
+  };
   const [users, setUsers] = useState([]);
-  const [isOpenForm, setIsOpenForm] = useState(false);
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [currentUser, setCurrentUser] = useState({
+    id: "",
+    username: "",
+    age: "",
+  });
 
   useEffect(() => {
     fetchAllData();
@@ -20,23 +30,46 @@ function App() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const postData = {
-      username: e.target.username.value,
-      age: e.target.age.value,
-    };
 
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(postData),
-    };
+    if (!isUpdate) {
+      const postData = {
+        username: e.target.username.value,
+        age: e.target.age.value,
+      };
 
-    const FETCHED_DATA = await fetch(URL, options);
-    const FETCHED_JSON = await FETCHED_DATA.json();
-    console.log(FETCHED_JSON);
-    setUsers(FETCHED_JSON.data);
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
+      };
+
+      const FETCHED_DATA = await fetch(URL, options);
+      const FETCHED_JSON = await FETCHED_DATA.json();
+      console.log(FETCHED_JSON);
+      setUsers(FETCHED_JSON.data);
+    } else {
+      console.log("sending update");
+      const putData = {
+        id: currentUser.id,
+        username: currentUser.username,
+        age: currentUser.age,
+      };
+      const options = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(putData),
+      };
+
+      console.log(options);
+      const FETCHED_DATA = await fetch(URL, options);
+      const FETCHED_JSON = await FETCHED_DATA.json();
+      console.log(FETCHED_JSON);
+      setUsers(FETCHED_JSON.data);
+    }
   }
 
   async function handleDelete(id) {
@@ -54,11 +87,32 @@ function App() {
     setUsers(FETCHED_JSON.data);
   }
 
-  async function handleEdit(id) {
-    setIsOpenForm(true);
+  async function handleEdit(userId) {
+    setIsUpdate(true);
+    console.log(userId);
+
+    const filteredUser = users.filter((user) => user.id === userId)[0];
+    console.log(filteredUser);
+    if (filteredUser) {
+      setCurrentUser({
+        id: filteredUser.id,
+        age: filteredUser.age,
+        username: filteredUser.username,
+      });
+    }
   }
 
-  async function handleSave() {}
+  function handleUserName(e) {
+    console.log(e.target.value);
+    setCurrentUser({ ...currentUser, username: e.target.value });
+  }
+
+  function handleUserAge(e) {
+    console.log(e.target.value);
+    setCurrentUser({ ...currentUser, age: e.target.value });
+  }
+
+  // async function handleSave() {}
 
   return (
     <div className="App" onSubmit={handleSubmit}>
@@ -66,14 +120,26 @@ function App() {
       <h3>Create user form</h3>
       <form action="">
         <label htmlFor="">
-          User Name: <input type="text" name="username" />
+          User Name:{" "}
+          <input
+            type="text"
+            name="username"
+            value={currentUser.username}
+            onChange={handleUserName}
+          />
         </label>
         <br />
         <label htmlFor="">
-          Age: <input type="text" name="age" />
+          Age:{" "}
+          <input
+            type="text"
+            name="age"
+            value={currentUser.age}
+            onChange={handleUserAge}
+          />
         </label>
         <br />
-        <button>Submit</button>
+        <button>{isUpdate ? "Update" : "Submit"}</button>
       </form>
 
       <h3>Users List</h3>
@@ -81,32 +147,18 @@ function App() {
         users.map((user, index) => {
           return (
             <div key={index} className="user-list">
-              {isOpenForm ? (
-                <div>
-                  <label htmlFor="">
-                    User Name:
-                    <input
-                      type="text"
-                      name="username"
-                      placeholder={user.username}
-                    />
-                  </label>
-                  <label htmlFor="">
-                    Age: <input type="text" name="age" placeholder={user.age} />
-                  </label>
-                </div>
-              ) : (
-                <p>
-                  {user.username} : {user.age}
-                </p>
-              )}
+              <p>
+                {user.username} : {user.age}
+              </p>
 
               <div>
-                {isOpenForm ? (
+                {/* {isOpenForm ? (
                   <button onClick={() => handleSave(user.id)}>Save</button>
                 ) : (
                   <button onClick={() => handleEdit(user.id)}>Edit</button>
-                )}
+                )} */}
+
+                <button onClick={() => handleEdit(user.id)}>Edit</button>
 
                 <button onClick={() => handleDelete(user.id)}>Delete</button>
               </div>

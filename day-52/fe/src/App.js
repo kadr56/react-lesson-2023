@@ -10,11 +10,7 @@ function App() {
   };
   const [users, setUsers] = useState([]);
   const [isUpdate, setIsUpdate] = useState(false);
-  const [currentUser, setCurrentUser] = useState({
-    id: "",
-    username: "",
-    age: "",
-  });
+  const [currentUser, setCurrentUser] = useState(newUser);
 
   useEffect(() => {
     fetchAllData();
@@ -24,7 +20,6 @@ function App() {
     // fetch a data from localhost: 8080/users
     const FETCHED_DATA = await fetch(URL); //reponse
     const FETCHED_JSON = await FETCHED_DATA.json(); // {status: 'success', data: {{id: ....}}}
-    console.log(FETCHED_JSON.data, "FETCHED_JSON.data");
     setUsers(FETCHED_JSON.data);
   }
 
@@ -47,7 +42,6 @@ function App() {
 
       const FETCHED_DATA = await fetch(URL, options);
       const FETCHED_JSON = await FETCHED_DATA.json();
-      console.log(FETCHED_JSON);
       setUsers(FETCHED_JSON.data);
     } else {
       console.log("sending update");
@@ -64,11 +58,11 @@ function App() {
         body: JSON.stringify(putData),
       };
 
-      console.log(options);
       const FETCHED_DATA = await fetch(URL, options);
       const FETCHED_JSON = await FETCHED_DATA.json();
-      console.log(FETCHED_JSON);
       setUsers(FETCHED_JSON.data);
+      setIsUpdate(false);
+      setCurrentUser(newUser);
     }
   }
 
@@ -89,7 +83,6 @@ function App() {
 
   async function handleEdit(userId) {
     setIsUpdate(true);
-    console.log(userId);
 
     const filteredUser = users.filter((user) => user.id === userId)[0];
     console.log(filteredUser);
@@ -103,16 +96,12 @@ function App() {
   }
 
   function handleUserName(e) {
-    console.log(e.target.value);
     setCurrentUser({ ...currentUser, username: e.target.value });
   }
 
   function handleUserAge(e) {
-    console.log(e.target.value);
     setCurrentUser({ ...currentUser, age: e.target.value });
   }
-
-  // async function handleSave() {}
 
   return (
     <div className="App" onSubmit={handleSubmit}>
@@ -152,14 +141,7 @@ function App() {
               </p>
 
               <div>
-                {/* {isOpenForm ? (
-                  <button onClick={() => handleSave(user.id)}>Save</button>
-                ) : (
-                  <button onClick={() => handleEdit(user.id)}>Edit</button>
-                )} */}
-
                 <button onClick={() => handleEdit(user.id)}>Edit</button>
-
                 <button onClick={() => handleDelete(user.id)}>Delete</button>
               </div>
             </div>

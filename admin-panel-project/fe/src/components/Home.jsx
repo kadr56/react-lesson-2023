@@ -23,9 +23,17 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import StarBorder from "@mui/icons-material/StarBorder";
 
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import PersonIcon from "@mui/icons-material/Person";
+import DescriptionIcon from "@mui/icons-material/Description";
+import { Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import Users from "../pages/Users";
+import UserAdd from "../pages/UserAdd";
+
 const drawerWidth = 240;
 
-export default function SideBar() {
+export default function Home() {
   const [open, setOpen] = React.useState(true);
 
   const handleClick = () => {
@@ -40,7 +48,7 @@ export default function SideBar() {
       >
         <Toolbar>
           <Typography variant="h6" noWrap component="div">
-            Clipped drawer
+            Admin Dashboard
           </Typography>
         </Toolbar>
       </AppBar>
@@ -58,21 +66,6 @@ export default function SideBar() {
         <Toolbar />
         <Box sx={{ overflow: "auto" }}>
           {/* <List>
-            {["Profile", "Dashboard", "E-Commerce", "User"].map(
-              (text, index) => (
-                <ListItem key={text} disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                  </ListItemButton>
-                </ListItem>
-              )
-            )}
-          </List> */}
-
-          <List>
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon>
@@ -105,7 +98,7 @@ export default function SideBar() {
                 <ListItemText primary="Users" />
               </ListItemButton>
             </ListItem>
-          </List>
+          </List> */}
 
           <List
             sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
@@ -121,19 +114,22 @@ export default function SideBar() {
               <ListItemIcon>
                 <SendIcon />
               </ListItemIcon>
-              <ListItemText primary="Sent mail" />
+              <ListItemText primary="Profile" />
             </ListItemButton>
+
             <ListItemButton>
               <ListItemIcon>
                 <DraftsIcon />
               </ListItemIcon>
-              <ListItemText primary="Drafts" />
+              <ListItemText primary="Dashboard" />
             </ListItemButton>
+
+            {/* Ecommerce */}
             <ListItemButton onClick={handleClick}>
               <ListItemIcon>
-                <InboxIcon />
+                <ShoppingCartIcon />
               </ListItemIcon>
-              <ListItemText primary="Inbox" />
+              <ListItemText primary="E-commerce" />
               {open ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse in={open} timeout="auto" unmountOnExit>
@@ -142,14 +138,68 @@ export default function SideBar() {
                   <ListItemIcon>
                     <StarBorder />
                   </ListItemIcon>
-                  <ListItemText primary="Starred" />
+                  <ListItemText primary="Product Manage" />
+                </ListItemButton>
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary="Product Grid" />
+                </ListItemButton>
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary="Product Page" />
                 </ListItemButton>
               </List>
             </Collapse>
+
+            {/* Users */}
+            <ListItemButton onClick={handleClick}>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText primary="User" />
+              {open ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                {/* <Link to={"/users"}> */}
+                <ListItemButton sx={{ pl: 4 }} to="/users">
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary="User list" />
+                </ListItemButton>
+                {/* </Link> */}
+
+                <ListItemButton sx={{ pl: 4 }} to="/userAdd">
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary="User Add" />
+                </ListItemButton>
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary="User Edit" />
+                </ListItemButton>
+              </List>
+            </Collapse>
+
+            {/* Documentation */}
+            <ListItemButton>
+              <ListItemIcon>
+                <DescriptionIcon />
+              </ListItemIcon>
+              <ListItemText primary="Documentation" />
+            </ListItemButton>
           </List>
 
           <Divider />
-          <List>
+          {/* <List>
             {["All mail", "Trash", "Spam"].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
@@ -160,40 +210,18 @@ export default function SideBar() {
                 </ListItemButton>
               </ListItem>
             ))}
-          </List>
+          </List> */}
         </Box>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-          dolor purus non enim praesent elementum facilisis leo vel. Risus at
-          ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum
-          quisque non tellus. Convallis convallis tellus id interdum velit
-          laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed
-          adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-          integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
-          eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
-          quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-          vivamus at augue. At augue eget arcu dictum varius duis at consectetur
-          lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
-          faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-          ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-          elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse
-          sed nisi lacus sed viverra tellus. Purus sit amet volutpat consequat
-          mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis
-          risus sed vulputate odio. Morbi tincidunt ornare massa eget egestas
-          purus viverra accumsan in. In hendrerit gravida rutrum quisque non
-          tellus orci ac. Pellentesque nec nam aliquam sem et tortor. Habitant
-          morbi tristique senectus et. Adipiscing elit duis tristique
-          sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+
+        <Routes>
+          <Route path="/users" element={<Users />}></Route>
+          <Route path="/userAdd" element={<UserAdd />}></Route>
+
+          {/* <Route path="/" element={<SideBar />} /> */}
+        </Routes>
       </Box>
     </Box>
   );

@@ -28,7 +28,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import DescriptionIcon from "@mui/icons-material/Description";
 import { Link } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
-import Users from "../pages/Users";
+import UserList from "../pages/UserList";
 import UserAdd from "../pages/UserAdd";
 
 const drawerWidth = 240;
@@ -166,7 +166,7 @@ export default function Home() {
             <Collapse in={open} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
                 {/* <Link to={"/users"}> */}
-                <ListItemButton sx={{ pl: 4 }} to="/users">
+                <ListItemButton sx={{ pl: 4 }} to="/user/list">
                   <ListItemIcon>
                     <StarBorder />
                   </ListItemIcon>
@@ -174,7 +174,7 @@ export default function Home() {
                 </ListItemButton>
                 {/* </Link> */}
 
-                <ListItemButton sx={{ pl: 4 }} to="/userAdd">
+                <ListItemButton sx={{ pl: 4 }} to="/user/add">
                   <ListItemIcon>
                     <StarBorder />
                   </ListItemIcon>
@@ -217,8 +217,8 @@ export default function Home() {
         <Toolbar />
 
         <Routes>
-          <Route path="/users" element={<Users />}></Route>
-          <Route path="/userAdd" element={<UserAdd />}></Route>
+          <Route path="/user/list" element={<UserList />}></Route>
+          <Route path="/user/add" element={<UserAdd />}></Route>
 
           {/* <Route path="/" element={<SideBar />} /> */}
         </Routes>

@@ -30,6 +30,7 @@ import { Link } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import UserList from "../pages/UserList";
 import UserAdd from "../pages/UserAdd";
+import UserEdit from "../pages/UserEdit";
 
 const drawerWidth = 240;
 
@@ -219,6 +220,7 @@ export default function Home() {
         <Routes>
           <Route path="/user/list" element={<UserList />}></Route>
           <Route path="/user/add" element={<UserAdd />}></Route>
+          <Route path="/user/edit/:id" element={<UserEdit />}></Route>
 
           {/* <Route path="/" element={<SideBar />} /> */}
         </Routes>

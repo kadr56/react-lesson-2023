@@ -2,6 +2,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import { Box, Stack } from "@mui/system";
 import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export default function UsersTable() {
   const URL = "http://localhost:8080/users";
@@ -18,13 +19,31 @@ export default function UsersTable() {
     setUsers(FETCHED_JSON.data);
   }
 
+  async function handleDelete(id) {
+    const options = {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: id,
+      }),
+    };
+    const FETCHED_DATA = await fetch(URL, options);
+    const FETCHED_JSON = await FETCHED_DATA.json();
+    setUsers(FETCHED_JSON.data);
+  }
+
+  function handleEdit(id) {}
+
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
-    { field: "firstName", headerName: "First name", width: 130 },
-    { field: "lastName", headerName: "Last name", width: 130 },
+    { field: "firstname", headerName: "First name", width: 130 },
+    { field: "lastname", headerName: "Last name", width: 130 },
+    { field: "email", headerName: "email", width: 130 },
     {
-      field: "age",
-      headerName: "Age",
+      field: "phonenumber",
+      headerName: "Phone Number",
       type: "number",
       width: 90,
     },
@@ -35,7 +54,7 @@ export default function UsersTable() {
       sortable: false,
       width: 160,
       valueGetter: (params) =>
-        `${params.row.firstName || ""} ${params.row.lastName || ""}`,
+        `${params.row.firstname || ""} ${params.row.lastname || ""}`,
     },
     {
       field: "Action",
@@ -45,10 +64,16 @@ export default function UsersTable() {
         return (
           <Box width="100%">
             <Stack direction="row" spacing={2}>
-              <Button variant="outlined" color="success">
-                Edit
-              </Button>
-              <Button variant="outlined" color="error">
+              <Link to={`/user/edit/${params.row.id}`}>
+                <Button variant="outlined" color="success">
+                  Edit
+                </Button>
+              </Link>
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={() => handleDelete(params.row.id)}
+              >
                 Delete
               </Button>
             </Stack>

@@ -17,6 +17,7 @@ export default function UsersTable() {
     const FETCHED_DATA = await fetch(URL);
     const FETCHED_JSON = await FETCHED_DATA.json();
     setUsers(FETCHED_JSON.data);
+    console.log(users);
   }
 
   async function handleDelete(id) {
@@ -34,7 +35,7 @@ export default function UsersTable() {
     setUsers(FETCHED_JSON.data);
   }
 
-  function handleEdit(id) {}
+  // function handleEdit(id) {}
 
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
@@ -47,15 +48,15 @@ export default function UsersTable() {
       type: "number",
       width: 90,
     },
-    {
-      field: "fullName",
-      headerName: "Full name",
-      description: "This column has a value getter and is not sortable.",
-      sortable: false,
-      width: 160,
-      valueGetter: (params) =>
-        `${params.row.firstname || ""} ${params.row.lastname || ""}`,
-    },
+    // {
+    //   field: "fullName",
+    //   headerName: "Full name",
+    //   description: "This column has a value getter and is not sortable.",
+    //   sortable: false,
+    //   width: 160,
+    //   valueGetter: (params) =>
+    //     `${params.row.firstname || ""} ${params.row.lastname || ""}`,
+    // },
     {
       field: "Action",
       headerName: "Action",

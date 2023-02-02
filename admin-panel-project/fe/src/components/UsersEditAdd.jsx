@@ -32,7 +32,7 @@ export default function UsersEditAdd({ id }) {
       setIsUpdate(true);
       console.log("Edit user");
       const filteredUser = users.filter((user) => {
-        if (user.id == id) {
+        if (user.id === id) {
           console.log("user.id = ", user.id);
           console.log("id = ", id);
           return user;
@@ -61,7 +61,8 @@ export default function UsersEditAdd({ id }) {
     const FETCHED_JSON = await FETCHED_DATA.json(); // {status: 'success', data: {{id: ....}}}
     setUsers(FETCHED_JSON.data);
     console.log("Fetch users");
-    console.log(users);
+    // console.log(FETCHED_JSON.data);
+    // console.log(users);
   }
 
   async function handleSubmit(e) {

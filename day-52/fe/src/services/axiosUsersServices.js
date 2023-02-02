@@ -19,6 +19,7 @@ async function deleteUser(id, URL, setUsers) {
   //   const FETCHED_JSON = await FETCHED_DATA.json();
   setUsers(FETCHED_DATA.data.data);
 }
+
 async function createUser(e, URL, setUsers) {
   const postData = {
     username: e.target.username.value,

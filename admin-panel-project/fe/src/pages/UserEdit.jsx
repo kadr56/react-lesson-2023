@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 export default function UserEdit() {
   const data = useParams();
-  console.log(data);
+  // console.log(data);
   return (
     <div>
       {/* <Typography variant="h4" color="initial"></Typography> */}

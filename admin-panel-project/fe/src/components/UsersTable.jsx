@@ -4,9 +4,9 @@ import { Box, Stack } from "@mui/system";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
-export default function UsersTable() {
+export default function UsersTable({ users, setUsers }) {
   const URL = "http://localhost:8080/users";
-  const [users, setUsers] = useState(false);
+  // const [users, setUsers] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -17,7 +17,10 @@ export default function UsersTable() {
     const FETCHED_DATA = await fetch(URL);
     const FETCHED_JSON = await FETCHED_DATA.json();
     setUsers(FETCHED_JSON.data);
-    console.log(users);
+    // console.log(FETCHED_JSON.data)
+    // if (users) {
+    //   console.log(users, "UserTable users = ");
+    // }
   }
 
   async function handleDelete(id) {

@@ -1,39 +1,18 @@
-console.log("it is my app.js");
-//import necessary modules
 const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
-// const { findSourceMap } = require("module");
-
-// config of modules
+const { request } = require("http");
+const { response } = require("express");
+const e = require("express");
 const app = express();
 const PORT = 8080;
 
 app.use(cors());
 app.use(express.json());
 
-app.get("/users", (request, response) => {
-  console.log("get method")
-  fs.readFile("./data/users.json", "utf-8", (readError, readData) => {
-    if (readError) {
-      response.json({
-        status: "file reader error",
-        data: [],
-      });
-    }
-
-    const objectData = JSON.parse(readData);
-
-    response.json({
-      status: "success",
-      data: objectData,
-    });
-  });
-});
-
 app.delete("/users", (request, response) => {
-  console.log("delete method")
   const body = request.body;
+
   fs.readFile("./data/users.json", "utf-8", (readError, readData) => {
     if (readError) {
       response.json({
@@ -43,11 +22,11 @@ app.delete("/users", (request, response) => {
     }
 
     const readObject = JSON.parse(readData);
+    const filteredObject = readObject.filter((o) => o.id !== body.userId);
 
-    const filteredObjects = readObject.filter((o) => o.id !== body.userId);
     fs.writeFile(
       "./data/users.json",
-      JSON.stringify(filteredObjects),
+      JSON.stringify(filteredObject),
       (writeError) => {
         if (writeError) {
           response.json({
@@ -57,24 +36,39 @@ app.delete("/users", (request, response) => {
         }
         response.json({
           status: "success",
-          data: filteredObjects,
+          data: filteredObject,
         });
       }
     );
   });
 });
 
+app.get("/users", (request, response) => {
+  fs.readFile("./data/users.json", "utf-8", (readError, readData) => {
+    if (readError) {
+      response.json({
+        status: "file reader error",
+        data: [],
+      });
+    }
+
+    const ObjectData = JSON.parse(readData);
+
+    response.json({
+      status: "success",
+      data: ObjectData,
+    });
+  });
+});
+
 app.post("/users", (request, response) => {
-  console.log("post method")
   const body = request.body;
   console.log(body);
 
   const newUser = {
     id: Date.now().toString(),
-    firstname: body.firstname,
-    lastname: body.lastname,
-    phonenumber: body.phonenumber,
-    email: body.email,
+    username: body.username,
+    age: body.age,
   };
 
   fs.readFile("./data/users.json", "utf-8", (readError, readData) => {
@@ -84,10 +78,12 @@ app.post("/users", (request, response) => {
         data: [],
       });
     }
+    // console.log(readData);
+    // console.log(typeof readData);
 
     const dataObject = JSON.parse(readData);
     console.log(dataObject);
-    console.log("========");
+    console.log("=======");
     dataObject.push(newUser);
     console.log(dataObject);
 
@@ -110,10 +106,7 @@ app.post("/users", (request, response) => {
   });
 });
 
-console.log("Outside")
 app.put("/users", (request, response) => {
-  console.log("Putting data method")
-  console.log(response.body)
   fs.readFile("./data/users.json", "utf-8", (readError, readData) => {
     if (readError) {
       response.json({
@@ -125,10 +118,7 @@ app.put("/users", (request, response) => {
 
     const changedData = savedData.map((d) => {
       if (d.id === request.body.id) {
-        (d.firstname = request.body.firstname),
-          (d.lastname = request.body.lastname);
-        (d.phonenumber = request.body.phonenumber);
-        (d.email = request.body.email);
+        (d.username = request.body.username), (d.age = request.body.age);
       }
       return d;
     });
@@ -153,7 +143,6 @@ app.put("/users", (request, response) => {
   });
 });
 
-
 app.listen(PORT, () => {
-  console.log(`server is running on http://localhost:${PORT}`);
+  console.log(` Server is running on http://localhost:${PORT}`);
 });

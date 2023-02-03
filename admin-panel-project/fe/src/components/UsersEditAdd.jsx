@@ -17,8 +17,10 @@ export default function UsersEditAdd({ id, users, setUsers }) {
   const URL = "http://localhost:8080/users";
   const newUser = {
     id: "",
-    username: "",
-    age: "",
+    firstname: "",
+    lastname: "",
+    phonenumber: "",
+    email: "",
   };
   // const [users, setUsers] = useState([]);
   const [isUpdate, setIsUpdate] = useState(false);
@@ -26,21 +28,24 @@ export default function UsersEditAdd({ id, users, setUsers }) {
 
   useEffect(() => {
     fetchAllData();
-    console.log(id);
-    console.log(users);
+    // console.log(id);
+    console.log(users, "users ===");
     if (id) {
       setIsUpdate(true);
       console.log("Edit user");
-      const filteredUser = users.filter((user) => {
-        if (user.id === id) {
-          console.log("user.id = ", user.id);
-          console.log("id = ", id);
-          return user;
-        }
-      })[0];
+      const filteredUser = users.filter((user) => user.id === id)[0];
+
+      // const filteredUser = users.filter((user) => {
+      //   if (user.id === id) {
+      //     console.log("user.id = ", user.id);
+      //     console.log("id = ", id);
+      //     return user;
+      //   }
+      // })[0];
       console.log(filteredUser);
       if (filteredUser) {
         setCurrentUser({
+          ...currentUser,
           id: filteredUser.id,
           firstname: filteredUser.firstname,
           lastname: filteredUser.lastname,
@@ -78,50 +83,112 @@ export default function UsersEditAdd({ id, users, setUsers }) {
     // console.log(" disabled: " + e.target.disabled.value);
     // console.log(" password: " + e.target.password.value);
 
-    // if (!isUpdate) {
-    const postData = {
-      firstname: e.target.firstname.value,
-      lastname: e.target.lastname.value,
-      phonenumber: e.target.phonenumber.value,
-      email: e.target.email.value,
-      // role: e.target.role.value,
-      // disabled: e.target.disabled.value,
-      // password: e.target.password.value,
-    };
+    if (!isUpdate) {
+      const postData = {
+        firstname: e.target.firstname.value,
+        lastname: e.target.lastname.value,
+        phonenumber: e.target.phonenumber.value,
+        email: e.target.email.value,
+        // role: e.target.role.value,
+        // disabled: e.target.disabled.value,
+        // password: e.target.password.value,
+      };
 
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(postData),
-    };
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
+      };
 
-    const FETCHED_DATA = await fetch(URL, options);
-    const FETCHED_JSON = await FETCHED_DATA.json();
-    setUsers(FETCHED_JSON.data);
-    // } else {
-    //   console.log("sending update");
-    //   const putData = {
-    //     id: currentUser.id,
-    //     username: currentUser.username,
-    //     age: currentUser.age,
-    //   };
-    //   const options = {
-    //     method: "PUT",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(putData),
-    //   };
+      const FETCHED_DATA = await fetch(URL, options);
+      const FETCHED_JSON = await FETCHED_DATA.json();
+      setUsers(FETCHED_JSON.data);
+    } else {
+      console.log("sending update");
+      const putData = {
+        id: currentUser.id,
+        firstname: currentUser.firstname,
+        lastname: currentUser.lastname,
+        phonenumber: currentUser.phonenumber,
+        email: currentUser.email,
+        // role: currentUser.role,
+        // disabled: currentUser.disabled,
+        // password: currentUser.password,
 
-    //   const FETCHED_DATA = await fetch(URL, options);
-    //   const FETCHED_JSON = await FETCHED_DATA.json();
-    //   setUsers(FETCHED_JSON.data);
-    //   setIsUpdate(false);
-    //   setCurrentUser(newUser);
-    // }
+      };
+      console.log(putData, "putdata")
+      const options = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(putData),
+      };
+
+      const FETCHED_DATA = await fetch(URL, options);
+      const FETCHED_JSON = await FETCHED_DATA.json();
+      setUsers(FETCHED_JSON.data);
+      console.log(FETCHED_JSON.data, "FETCHED JSON")
+      setIsUpdate(false);
+      setCurrentUser(newUser);
+    }
   }
+
+  async function handleEdit(userId) {
+    console.log("edit");
+    setIsUpdate(true);
+
+    const filteredUser = users.filter((user) => user.id === userId)[0];
+    if (filteredUser) {
+      setCurrentUser({
+        ...currentUser,
+        id: filteredUser.id,
+        firstname: filteredUser.firstname,
+        lastname: filteredUser.lastname,
+        phonenumber: filteredUser.phonenumber,
+        email: filteredUser.email,
+      });
+    }
+  }
+
+  function handleFirstName(e) {
+    setCurrentUser({
+      ...currentUser,
+      firstname: e.target.value,
+    });
+  }
+
+  function handleLastName(e) {
+    setCurrentUser({
+      ...currentUser,
+      lastname: e.target.value,
+    });
+  }
+
+  function handleLastName(e) {
+    setCurrentUser({
+      ...currentUser,
+      lastname: e.target.value,
+    });
+  }
+
+  function handlePhoneNumber(e) {
+    setCurrentUser({
+      ...currentUser,
+      phonenumber: e.target.value,
+    });
+  }
+
+  function handleEmail(e) {
+    setCurrentUser({
+      ...currentUser,
+      handleEmail: e.target.value,
+    });
+  }
+
+
 
   function handleReset() {
     console.log("Reset button clicked");
@@ -134,7 +201,8 @@ export default function UsersEditAdd({ id, users, setUsers }) {
   return (
     <div style={{ width: "100%" }}>
       <Typography variant="h5" color="initial" sx={{ mb: 2 }}>
-        Add Users
+
+        {isUpdate ? "Edit user" : "Add Users"}
       </Typography>
       <form onSubmit={handleSubmit}>
         <Box
@@ -152,7 +220,7 @@ export default function UsersEditAdd({ id, users, setUsers }) {
             variant="outlined"
             name="firstname"
             value={currentUser.firstname}
-          // onChange={handleFirstName}
+            onChange={handleFirstName}
           />
 
           <TextField
@@ -161,6 +229,7 @@ export default function UsersEditAdd({ id, users, setUsers }) {
             variant="outlined"
             name="lastname"
             value={currentUser.lastname}
+            onChange={handleLastName}
           />
 
           <TextField
@@ -169,6 +238,8 @@ export default function UsersEditAdd({ id, users, setUsers }) {
             variant="outlined"
             name="phonenumber"
             value={currentUser.phonenumber}
+            onChange={handlePhoneNumber}
+
           />
 
           <TextField
@@ -177,6 +248,8 @@ export default function UsersEditAdd({ id, users, setUsers }) {
             variant="outlined"
             name="email"
             value={currentUser.email}
+            onChange={handleEmail}
+
           />
 
           <Box>

@@ -31,11 +31,11 @@ import { Routes, Route } from "react-router-dom";
 import UserList from "../pages/UserList";
 import UserAdd from "../pages/UserAdd";
 import UserEdit from "../pages/UserEdit";
+import { useState } from "react";
 
 const drawerWidth = 240;
 
 export default function Home() {
-
   const [open, setOpen] = React.useState(true);
   const [users, setUsers] = useState([]);
 
@@ -68,7 +68,6 @@ export default function Home() {
       >
         <Toolbar />
         <Box sx={{ overflow: "auto" }}>
-
           <List
             sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
             component="nav"
@@ -186,9 +185,18 @@ export default function Home() {
         <Toolbar />
 
         <Routes>
-          <Route path="/user/list" element={<UserList users={users} setUsers={setUsers} />}></Route>
-          <Route path="/user/add" element={<UserAdd users={users} setUsers={setUsers} />}></Route>
-          <Route path="/user/edit/:id" element={<UserEdit users={users} setUsers={setUsers} />}></Route>
+          <Route
+            path="/user/list"
+            element={<UserList users={users} setUsers={setUsers} />}
+          ></Route>
+          <Route
+            path="/user/add"
+            element={<UserAdd users={users} setUsers={setUsers} />}
+          ></Route>
+          <Route
+            path="/user/edit/:id"
+            element={<UserEdit users={users} setUsers={setUsers} />}
+          ></Route>
 
           {/* <Route path="/" element={<SideBar />} /> */}
         </Routes>

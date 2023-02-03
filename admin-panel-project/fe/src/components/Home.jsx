@@ -35,7 +35,9 @@ import UserEdit from "../pages/UserEdit";
 const drawerWidth = 240;
 
 export default function Home() {
+
   const [open, setOpen] = React.useState(true);
+  const [users, setUsers] = useState([]);
 
   const handleClick = () => {
     setOpen(!open);
@@ -66,40 +68,6 @@ export default function Home() {
       >
         <Toolbar />
         <Box sx={{ overflow: "auto" }}>
-          {/* <List>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <InboxIcon />
-                </ListItemIcon>
-                <ListItemText primary="Profile" />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <InboxIcon />
-                </ListItemIcon>
-                <ListItemText primary="Dashboard" />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <InboxIcon />
-                </ListItemIcon>
-                <ListItemText primary="E-Commerce" />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <InboxIcon />
-                </ListItemIcon>
-                <ListItemText primary="Users" />
-              </ListItemButton>
-            </ListItem>
-          </List> */}
 
           <List
             sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
@@ -218,9 +186,9 @@ export default function Home() {
         <Toolbar />
 
         <Routes>
-          <Route path="/user/list" element={<UserList />}></Route>
-          <Route path="/user/add" element={<UserAdd />}></Route>
-          <Route path="/user/edit/:id" element={<UserEdit />}></Route>
+          <Route path="/user/list" element={<UserList users={users} setUsers={setUsers} />}></Route>
+          <Route path="/user/add" element={<UserAdd users={users} setUsers={setUsers} />}></Route>
+          <Route path="/user/edit/:id" element={<UserEdit users={users} setUsers={setUsers} />}></Route>
 
           {/* <Route path="/" element={<SideBar />} /> */}
         </Routes>

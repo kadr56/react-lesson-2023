@@ -4,7 +4,7 @@ import { Box, Stack } from "@mui/system";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
-export default function UsersTable({ products, setProducts }) {
+export default function ProductsTable({ products, setProducts }) {
   const URL = "http://localhost:8080/products";
   // const [products, setProducts] = useState(false);
 
@@ -27,7 +27,7 @@ export default function UsersTable({ products, setProducts }) {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        userId: id,
+        productId: id,
       }),
     };
     const FETCHED_DATA = await fetch(URL, options);
@@ -39,15 +39,15 @@ export default function UsersTable({ products, setProducts }) {
 
   const columns = [
     { field: "id", headerName: "ID", width: 140 },
-    { field: "firstname", headerName: "First name", width: 140 },
-    { field: "lastname", headerName: "Last name", width: 140 },
-    { field: "email", headerName: "email", width: 140 },
-    {
-      field: "phonenumber",
-      headerName: "Phone Number",
-      type: "number",
-      width: 140,
-    },
+    { field: "name", headerName: "Name", width: 140 },
+    { field: "price", headerName: "Price", width: 140 },
+    { field: "image", headerName: "Image", width: 140 },
+    { field: "quantity", headerName: "Quantity", width: 140, },
+    { field: "size", headerName: "Size", width: 140 },
+    { field: "color", headerName: "Color", width: 140 },
+    { field: "category", headerName: "Category", width: 140 },
+    { field: "description", headerName: "Description", width: 140 },
+
     {
       field: "Action",
       headerName: "Action",
@@ -56,7 +56,7 @@ export default function UsersTable({ products, setProducts }) {
         return (
           <Box width="100%">
             <Stack direction="row" spacing={2}>
-              <Link to={`/user/edit/${params.row.id}`}>
+              <Link to={`/product/edit/${params.row.id}`}>
                 <Button variant="outlined" color="success">
                   Edit
                 </Button>

@@ -14,62 +14,70 @@ import FormGroup from "@mui/material/FormGroup";
 import Checkbox from "@mui/material/Checkbox";
 import { useNavigate } from "react-router-dom";
 
-export default function UsersEditAdd({ id, users, setUsers }) {
-  const URL = "http://localhost:8080/users";
-  const newUser = {
+export default function ProductsEditAdd({ id, products, setProducts }) {
+  const URL = "http://localhost:8080/products";
+  const newProduct = {
     id: "",
-    firstname: "",
-    lastname: "",
-    phonenumber: "",
-    email: "",
+    name: "",
+    price: "",
+    image: "",
+    quantity: "",
+    size: "",
+    color: "",
+    category: "",
+    description: "",
   };
-  // const [users, setUsers] = useState([]);
+  // const [products, setProducts] = useState([]);
   const [isUpdate, setIsUpdate] = useState(false);
-  const [currentUser, setCurrentUser] = useState(newUser);
+  const [currentProduct, setCurrentProduct] = useState(newProduct);
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchAllData();
     // console.log(id);
-    console.log(users, "users ===");
+    console.log(products, "products ===");
     if (id) {
       setIsUpdate(true);
-      console.log("Edit user");
-      const filteredUser = users.filter((user) => user.id === id)[0];
+      console.log("Edit product");
+      const filteredProduct = products.filter((product) => product.id === id)[0];
 
-      // const filteredUser = users.filter((user) => {
-      //   if (user.id === id) {
-      //     console.log("user.id = ", user.id);
+      // const filteredProduct = products.filter((product) => {
+      //   if (product.id === id) {
+      //     console.log("product.id = ", product.id);
       //     console.log("id = ", id);
-      //     return user;
+      //     return product;
       //   }
       // })[0];
-      console.log(filteredUser);
-      if (filteredUser) {
-        setCurrentUser({
-          ...currentUser,
-          id: filteredUser.id,
-          firstname: filteredUser.firstname,
-          lastname: filteredUser.lastname,
-          phonenumber: filteredUser.phonenumber,
-          email: filteredUser.email,
+      console.log(filteredProduct);
+      if (filteredProduct) {
+        setCurrentProduct({
+          ...currentProduct,
+          id: filteredProduct.id,
+          name: filteredProduct.name,
+          price: filteredProduct.price,
+          image: filteredProduct.image,
+          quantity: filteredProduct.quantity,
+          size: filteredProduct.size,
+          color: filteredProduct.color,
+          category: filteredProduct.category,
+          description: filteredProduct.description,
         });
       }
     }
     // else {
     //   setIsUpdate(false);
-    //   console.log("Adding new user");
+    //   console.log("Adding new product");
     // }
   }, []);
 
   async function fetchAllData() {
-    // fetch a data from localhost: 8080/users
+    // fetch a data from localhost: 8080/products
     const FETCHED_DATA = await fetch(URL); //reponse
     const FETCHED_JSON = await FETCHED_DATA.json(); // {status: 'success', data: {{id: ....}}}
-    setUsers(FETCHED_JSON.data);
-    console.log("Fetch users");
+    setProducts(FETCHED_JSON.data);
+    console.log("Fetch products");
     // console.log(FETCHED_JSON.data);
-    // console.log(users);
+    // console.log(products);
   }
 
   async function handleSubmit(e) {
@@ -77,23 +85,24 @@ export default function UsersEditAdd({ id, users, setUsers }) {
 
     e.preventDefault();
 
-    console.log(" firstname: " + e.target.firstname.value);
-    console.log(" lastname: " + e.target.lastname.value);
-    console.log(" phonenumber: " + e.target.phonenumber.value);
-    console.log(" email: " + e.target.email.value);
+    console.log(" name: " + e.target.name.value);
+    console.log(" price: " + e.target.price.value);
+    console.log(" image: " + e.target.image.value);
+    console.log(" quantity: " + e.target.quantity.value);
     // console.log(" role: " + e.target.role.value);
     // console.log(" disabled: " + e.target.disabled.value);
     // console.log(" password: " + e.target.password.value);
 
     if (!isUpdate) {
       const postData = {
-        firstname: e.target.firstname.value,
-        lastname: e.target.lastname.value,
-        phonenumber: e.target.phonenumber.value,
-        email: e.target.email.value,
-        // role: e.target.role.value,
-        // disabled: e.target.disabled.value,
-        // password: e.target.password.value,
+        name: e.target.name.value,
+        price: e.target.price.value,
+        image: e.target.image.value,
+        quantity: e.target.quantity.value,
+        size: e.target.size.value,
+        color: e.target.color.value,
+        category: e.target.category.value,
+        description: e.target.description.value,
       };
 
       const options = {
@@ -106,18 +115,20 @@ export default function UsersEditAdd({ id, users, setUsers }) {
 
       const FETCHED_DATA = await fetch(URL, options);
       const FETCHED_JSON = await FETCHED_DATA.json();
-      setUsers(FETCHED_JSON.data);
+      setProducts(FETCHED_JSON.data);
     } else {
       console.log("sending update");
       const putData = {
-        id: currentUser.id,
-        firstname: currentUser.firstname,
-        lastname: currentUser.lastname,
-        phonenumber: currentUser.phonenumber,
-        email: currentUser.email,
-        // role: currentUser.role,
-        // disabled: currentUser.disabled,
-        // password: currentUser.password,
+        id: currentProduct.id,
+        name: currentProduct.name,
+        price: currentProduct.price,
+        image: currentProduct.image,
+        quantity: currentProduct.quantity,
+        size: currentProduct.size,
+        color: currentProduct.color,
+        categery: currentProduct.categery,
+        description: currentProduct.description,
+
 
       };
       console.log(putData, "putdata")
@@ -131,63 +142,89 @@ export default function UsersEditAdd({ id, users, setUsers }) {
 
       const FETCHED_DATA = await fetch(URL, options);
       const FETCHED_JSON = await FETCHED_DATA.json();
-      setUsers(FETCHED_JSON.data);
+      setProducts(FETCHED_JSON.data);
       console.log(FETCHED_JSON.data, "FETCHED JSON")
       setIsUpdate(false);
-      setCurrentUser(newUser);
+      setCurrentProduct(newProduct);
     }
-    navigate("/user/list");
+    navigate("/product/list");
   }
 
-  async function handleEdit(userId) {
+  async function handleEdit(productId) {
     console.log("edit");
     setIsUpdate(true);
 
-    const filteredUser = users.filter((user) => user.id === userId)[0];
-    if (filteredUser) {
-      setCurrentUser({
-        ...currentUser,
-        id: filteredUser.id,
-        firstname: filteredUser.firstname,
-        lastname: filteredUser.lastname,
-        phonenumber: filteredUser.phonenumber,
-        email: filteredUser.email,
+    const filteredProduct = products.filter((product) => product.id === productId)[0];
+    if (filteredProduct) {
+      setCurrentProduct({
+        ...currentProduct,
+        id: filteredProduct.id,
+        name: filteredProduct.name,
+        price: filteredProduct.price,
+        image: filteredProduct.image,
+        quantity: filteredProduct.quantity,
+        size: filteredProduct.size,
+        color: filteredProduct.color,
+        category: filteredProduct.category,
+        description: filteredProduct.description,
       });
     }
   }
 
-  function handleFirstName(e) {
-    setCurrentUser({
-      ...currentUser,
-      firstname: e.target.value,
+  function handleName(e) {
+    setCurrentProduct({
+      ...currentProduct,
+      name: e.target.value,
     });
   }
 
-  function handleLastName(e) {
-    setCurrentUser({
-      ...currentUser,
-      lastname: e.target.value,
+  function handlePrice(e) {
+    setCurrentProduct({
+      ...currentProduct,
+      price: e.target.value,
     });
   }
 
-  function handleLastName(e) {
-    setCurrentUser({
-      ...currentUser,
-      lastname: e.target.value,
+
+  function handleImage(e) {
+    setCurrentProduct({
+      ...currentProduct,
+      image: e.target.value,
     });
   }
 
-  function handlePhoneNumber(e) {
-    setCurrentUser({
-      ...currentUser,
-      phonenumber: e.target.value,
+  function handleQuantity(e) {
+    setCurrentProduct({
+      ...currentProduct,
+      quantity: e.target.value,
     });
   }
 
-  function handleEmail(e) {
-    setCurrentUser({
-      ...currentUser,
-      email: e.target.value,
+  function handleSize(e) {
+    setCurrentProduct({
+      ...currentProduct,
+      size: e.target.value,
+    });
+  }
+
+  function handleColor(e) {
+    setCurrentProduct({
+      ...currentProduct,
+      color: e.target.value,
+    });
+  }
+
+  function handleCategory(e) {
+    setCurrentProduct({
+      ...currentProduct,
+      category: e.target.value,
+    });
+  }
+
+  function handleDescription(e) {
+    setCurrentProduct({
+      ...currentProduct,
+      description: e.target.value,
     });
   }
 
@@ -205,7 +242,7 @@ export default function UsersEditAdd({ id, users, setUsers }) {
     <div style={{ width: "100%" }}>
       <Typography variant="h5" color="initial" sx={{ mb: 2 }}>
 
-        {isUpdate ? "Edit user" : "Add Users"}
+        {isUpdate ? "Edit product" : "Add Product"}
       </Typography>
       <form onSubmit={handleSubmit}>
         <Box
@@ -222,83 +259,75 @@ export default function UsersEditAdd({ id, users, setUsers }) {
             label="Image"
             variant="outlined"
             name="image"
-            value={currentUser.image}
-            onChange={handleFirstName}
+            value={currentProduct.image}
+            onChange={handleImage}
           />
 
           <TextField
             id="outlined-basic"
-            label="Last Name"
+            label="Name"
             variant="outlined"
-            name="lastname"
-            value={currentUser.lastname}
-            onChange={handleLastName}
+            name="name"
+            value={currentProduct.name}
+            onChange={handleName}
           />
 
           <TextField
             id="outlined-basic"
-            label="Phone Number"
+            label="Price"
             variant="outlined"
-            name="phonenumber"
-            value={currentUser.phonenumber}
-            onChange={handlePhoneNumber}
-
+            name="price"
+            value={currentProduct.price}
+            onChange={handlePrice}
           />
 
 
 
           <TextField
             id="outlined-basic"
-            label="Email"
+            label="Stock Quantity"
             variant="outlined"
-            name="email"
-            value={currentUser.email}
-            onChange={handleEmail}
-
+            name="quantity"
+            value={currentProduct.quantity}
+            onChange={handleQuantity}
           />
-
-
-          <Box>
-            {" "}
-            <FormLabel id="demo-row-radio-buttons-group-label">Role</FormLabel>
-            <RadioGroup
-              row
-              aria-labelledby="demo-row-radio-buttons-group-label"
-              name="role"
-            >
-              <FormControlLabel
-                value="admin"
-                control={<Radio />}
-                label="admin"
-                name="admin"
-              />
-              <FormControlLabel
-                value="user"
-                control={<Radio />}
-                label="user"
-                name="user"
-              />
-            </RadioGroup>
-          </Box>
-
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <FormLabel>Disabled</FormLabel>
-            <FormControlLabel control={<Checkbox />} name="disabled" />
-          </Box>
-
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-            <FormLabel>Avatar</FormLabel>
-            <Button variant="contained" sx={{ width: 180 }}>
-              UPLOAD AN IMAGE
-            </Button>
-          </Box>
 
           <TextField
             id="outlined-basic"
-            label="Password"
+            label="size"
             variant="outlined"
-            name="password"
+            name="size"
+            value={currentProduct.size}
+            onChange={handleSize}
           />
+
+          <TextField
+            id="outlined-basic"
+            label="color"
+            variant="outlined"
+            name="color"
+            value={currentProduct.color}
+            onChange={handleColor}
+          />
+
+          <TextField
+            id="outlined-basic"
+            label="category"
+            variant="outlined"
+            name="category"
+            value={currentProduct.category}
+            onChange={handleCategory}
+          />
+
+          <TextField
+            id="outlined-basic"
+            label="description"
+            variant="outlined"
+            name="description"
+            value={currentProduct.description}
+            onChange={handleDescription}
+          />
+
 
           <Box sx={{ display: "flex", gap: 3 }}>
             <Button variant="contained" type="submit">

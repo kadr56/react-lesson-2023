@@ -34,6 +34,7 @@ import UserEdit from "../pages/UserEdit";
 import { useState } from "react";
 import ProductList from "../pages/ProductList";
 import ProductAdd from "../pages/ProductAdd";
+import ProductEdit from "../pages/ProductEdit";
 
 
 const drawerWidth = 240;
@@ -204,6 +205,11 @@ export default function Home() {
           <Route
             path="/product/add"
             element={<ProductAdd products={products} setProducts={setProducts} />}
+          ></Route>
+
+          <Route
+            path="/product/edit/:id"
+            element={<ProductEdit products={products} setProducts={setProducts} />}
           ></Route>
 
           {/* <Route path="/" element={<SideBar />} /> */}

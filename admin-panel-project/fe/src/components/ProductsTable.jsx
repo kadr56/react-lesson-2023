@@ -4,23 +4,20 @@ import { Box, Stack } from "@mui/system";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
-export default function UsersTable({ users, setUsers }) {
-  const URL = "http://localhost:8080/users";
-  // const [users, setUsers] = useState(false);
+export default function UsersTable({ products, setProducts }) {
+  const URL = "http://localhost:8080/products";
+  // const [products, setProducts] = useState(false);
 
   useEffect(() => {
     fetchData();
   }, []);
 
   async function fetchData() {
-    // fetch a data from localhost: 8080/users
+    // fetch a data from localhost: 8080/products
     const FETCHED_DATA = await fetch(URL);
     const FETCHED_JSON = await FETCHED_DATA.json();
-    setUsers(FETCHED_JSON.data);
-    // console.log(FETCHED_JSON.data)
-    // if (users) {
-    //   console.log(users, "UserTable users = ");
-    // }
+    setProducts(FETCHED_JSON.data);
+    console.log(products, 'products')
   }
 
   async function handleDelete(id) {
@@ -35,7 +32,7 @@ export default function UsersTable({ users, setUsers }) {
     };
     const FETCHED_DATA = await fetch(URL, options);
     const FETCHED_JSON = await FETCHED_DATA.json();
-    setUsers(FETCHED_JSON.data);
+    setProducts(FETCHED_JSON.data);
   }
 
   // function handleEdit(id) {}
@@ -51,15 +48,6 @@ export default function UsersTable({ users, setUsers }) {
       type: "number",
       width: 140,
     },
-    // {
-    //   field: "fullName",
-    //   headerName: "Full name",
-    //   description: "This column has a value getter and is not sortable.",
-    //   sortable: false,
-    //   width: 160,
-    //   valueGetter: (params) =>
-    //     `${params.row.firstname || ""} ${params.row.lastname || ""}`,
-    // },
     {
       field: "Action",
       headerName: "Action",
@@ -87,23 +75,11 @@ export default function UsersTable({ users, setUsers }) {
     },
   ];
 
-  // const rows = [
-  //   { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  //   { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  //   { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  //   { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  //   { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  //   { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  //   { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  //   { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  //   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-  // ];
-
   return (
     <div style={{ height: 400, width: "100%" }}>
-      {users && (
+      {products && (
         <DataGrid
-          rows={users}
+          rows={products}
           columns={columns}
           pageSize={5}
           rowsPerPageOptions={[5]}

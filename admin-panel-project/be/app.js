@@ -12,6 +12,28 @@ const PORT = 8080;
 app.use(cors());
 app.use(express.json());
 
+
+// get products
+app.get("/products", (request, response) => {
+  console.log("get method")
+  fs.readFile("./data/products.json", "utf-8", (readError, readData) => {
+    if (readError) {
+      response.json({
+        status: "file reader error",
+        data: [],
+      });
+    }
+
+    const objectData = JSON.parse(readData);
+
+    response.json({
+      status: "success",
+      data: objectData,
+    });
+  });
+});
+
+// get users
 app.get("/users", (request, response) => {
   console.log("get method")
   fs.readFile("./data/users.json", "utf-8", (readError, readData) => {
@@ -31,6 +53,7 @@ app.get("/users", (request, response) => {
   });
 });
 
+// delete users
 app.delete("/users", (request, response) => {
   console.log("delete method")
   const body = request.body;
@@ -64,6 +87,7 @@ app.delete("/users", (request, response) => {
   });
 });
 
+// Create users
 app.post("/users", (request, response) => {
   console.log("post method")
   const body = request.body;
@@ -110,7 +134,7 @@ app.post("/users", (request, response) => {
   });
 });
 
-console.log("Outside")
+// Update users
 app.put("/users", (request, response) => {
   console.log("Putting data method")
   console.log(response.body)

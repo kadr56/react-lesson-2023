@@ -32,12 +32,16 @@ import UserList from "../pages/UserList";
 import UserAdd from "../pages/UserAdd";
 import UserEdit from "../pages/UserEdit";
 import { useState } from "react";
+import ProductList from "../pages/ProductList";
+import ProductAdd from "../pages/ProductAdd";
+
 
 const drawerWidth = 240;
 
 export default function Home() {
   const [open, setOpen] = React.useState(true);
   const [users, setUsers] = useState([]);
+  const [products, setProducts] = useState([]);
 
   const handleClick = () => {
     setOpen(!open);
@@ -102,17 +106,17 @@ export default function Home() {
             </ListItemButton>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ListItemButton sx={{ pl: 4 }}>
+                <ListItemButton sx={{ pl: 4 }} to="/product/list">
                   <ListItemIcon>
                     <StarBorder />
                   </ListItemIcon>
-                  <ListItemText primary="Product Manage" />
+                  <ListItemText primary="Product List" />
                 </ListItemButton>
-                <ListItemButton sx={{ pl: 4 }}>
+                <ListItemButton sx={{ pl: 4 }} to="/product/add">
                   <ListItemIcon>
                     <StarBorder />
                   </ListItemIcon>
-                  <ListItemText primary="Product Grid" />
+                  <ListItemText primary="Product Add" />
                 </ListItemButton>
                 <ListItemButton sx={{ pl: 4 }}>
                   <ListItemIcon>
@@ -148,12 +152,7 @@ export default function Home() {
                   </ListItemIcon>
                   <ListItemText primary="User Add" />
                 </ListItemButton>
-                <ListItemButton sx={{ pl: 4 }}>
-                  <ListItemIcon>
-                    <StarBorder />
-                  </ListItemIcon>
-                  <ListItemText primary="User Edit" />
-                </ListItemButton>
+
               </List>
             </Collapse>
 
@@ -196,6 +195,15 @@ export default function Home() {
           <Route
             path="/user/edit/:id"
             element={<UserEdit users={users} setUsers={setUsers} />}
+          ></Route>
+
+          <Route
+            path="/product/list"
+            element={<ProductList products={products} setProducts={setProducts} />}
+          ></Route>
+          <Route
+            path="/product/add"
+            element={<ProductAdd products={products} setProducts={setProducts} />}
           ></Route>
 
           {/* <Route path="/" element={<SideBar />} /> */}

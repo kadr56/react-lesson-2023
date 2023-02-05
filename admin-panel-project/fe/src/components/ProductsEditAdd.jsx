@@ -219,10 +219,10 @@ export default function UsersEditAdd({ id, users, setUsers }) {
         >
           <TextField
             id="outlined-basic"
-            label="First Name"
+            label="Image"
             variant="outlined"
-            name="firstname"
-            value={currentUser.firstname}
+            name="image"
+            value={currentUser.image}
             onChange={handleFirstName}
           />
 
@@ -257,15 +257,6 @@ export default function UsersEditAdd({ id, users, setUsers }) {
 
           />
 
-          {/* <TextField
-            id="outlined-basic"
-            label="Email"
-            variant="outlined"
-            name="email"
-            value={currentUser.email}
-            onChange={handleEmail}
-
-          /> */}
 
           <Box>
             {" "}

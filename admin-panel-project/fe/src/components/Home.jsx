@@ -36,7 +36,6 @@ import ProductList from "../pages/ProductList";
 import ProductAdd from "../pages/ProductAdd";
 import ProductEdit from "../pages/ProductEdit";
 
-
 const drawerWidth = 240;
 
 export default function Home() {
@@ -119,12 +118,6 @@ export default function Home() {
                   </ListItemIcon>
                   <ListItemText primary="Product Add" />
                 </ListItemButton>
-                <ListItemButton sx={{ pl: 4 }}>
-                  <ListItemIcon>
-                    <StarBorder />
-                  </ListItemIcon>
-                  <ListItemText primary="Product Page" />
-                </ListItemButton>
               </List>
             </Collapse>
 
@@ -153,7 +146,6 @@ export default function Home() {
                   </ListItemIcon>
                   <ListItemText primary="User Add" />
                 </ListItemButton>
-
               </List>
             </Collapse>
 
@@ -200,16 +192,22 @@ export default function Home() {
 
           <Route
             path="/product/list"
-            element={<ProductList products={products} setProducts={setProducts} />}
+            element={
+              <ProductList products={products} setProducts={setProducts} />
+            }
           ></Route>
           <Route
             path="/product/add"
-            element={<ProductAdd products={products} setProducts={setProducts} />}
+            element={
+              <ProductAdd products={products} setProducts={setProducts} />
+            }
           ></Route>
 
           <Route
             path="/product/edit/:id"
-            element={<ProductEdit products={products} setProducts={setProducts} />}
+            element={
+              <ProductEdit products={products} setProducts={setProducts} />
+            }
           ></Route>
 
           {/* <Route path="/" element={<SideBar />} /> */}

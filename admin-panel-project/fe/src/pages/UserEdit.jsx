@@ -1,18 +1,20 @@
 import UsersEditAdd from "../components/UsersEditAdd";
 import Typography from "@mui/material/Typography";
 import { useParams } from "react-router-dom";
-// import UsersTable from "../components/UsersTable";
+import MyBreadCrumbs from "../components/MyBreadCrumbs";
 
 export default function UserEdit({ users, setUsers }) {
-  // console.log("Inside UserEdit component ---")
-  // console.log(users, "User")
+  const link = [
+    { linkName: "User", link: "/" },
+    { linkName: "User List ", link: "/user/list" },
+    { linkName: "Edit User ", link: "/user/edit" },
+  ];
 
   const data = useParams();
-  // console.log(data);
-  // console.log(users, "users in user EDIT");
+
   return (
     <div>
-      {/* <Typography variant="h4" color="initial"></Typography> */}
+      <MyBreadCrumbs link={link} />
       <UsersEditAdd id={data.id} users={users} setUsers={setUsers} />
     </div>
   );

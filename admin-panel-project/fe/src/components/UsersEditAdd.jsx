@@ -118,9 +118,8 @@ export default function UsersEditAdd({ id, users, setUsers }) {
         // role: currentUser.role,
         // disabled: currentUser.disabled,
         // password: currentUser.password,
-
       };
-      console.log(putData, "putdata")
+      console.log(putData, "putdata");
       const options = {
         method: "PUT",
         headers: {
@@ -132,7 +131,7 @@ export default function UsersEditAdd({ id, users, setUsers }) {
       const FETCHED_DATA = await fetch(URL, options);
       const FETCHED_JSON = await FETCHED_DATA.json();
       setUsers(FETCHED_JSON.data);
-      console.log(FETCHED_JSON.data, "FETCHED JSON")
+      console.log(FETCHED_JSON.data, "FETCHED JSON");
       setIsUpdate(false);
       setCurrentUser(newUser);
     }
@@ -191,8 +190,6 @@ export default function UsersEditAdd({ id, users, setUsers }) {
     });
   }
 
-
-
   function handleReset() {
     console.log("Reset button clicked");
   }
@@ -203,11 +200,10 @@ export default function UsersEditAdd({ id, users, setUsers }) {
 
   return (
     <div style={{ width: "100%" }}>
-      <Typography variant="h5" color="initial" sx={{ mb: 2 }}>
-
-        {isUpdate ? "Edit user" : "Add Users"}
-      </Typography>
       <form onSubmit={handleSubmit}>
+        <Typography variant="h5" color="initial" sx={{ mb: 2 }}>
+          {isUpdate ? "Edit user" : "Add Users"}
+        </Typography>
         <Box
           sx={{
             width: 600,
@@ -242,10 +238,7 @@ export default function UsersEditAdd({ id, users, setUsers }) {
             name="phonenumber"
             value={currentUser.phonenumber}
             onChange={handlePhoneNumber}
-
           />
-
-
 
           <TextField
             id="outlined-basic"
@@ -254,7 +247,6 @@ export default function UsersEditAdd({ id, users, setUsers }) {
             name="email"
             value={currentUser.email}
             onChange={handleEmail}
-
           />
 
           {/* <TextField

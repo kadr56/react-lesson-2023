@@ -3,18 +3,24 @@ import Typography from "@mui/material/Typography";
 import { useParams } from "react-router-dom";
 import ProductsEditAdd from "../components/ProductsEditAdd";
 // import UsersTable from "../components/UsersTable";
+import MyBreadCrumbs from "../components/MyBreadCrumbs";
 
 export default function ProductEdit({ products, setProducts }) {
-  // console.log("Inside UserEdit component ---")
-  // console.log(users, "User")
-
   const data = useParams();
-  // console.log(data);
-  // console.log(users, "users in user EDIT");
+  const link = [
+    { linkName: "Ecommerce", link: "/" },
+    { linkName: "Product List ", link: "/product/list" },
+    { linkName: "Product Edit ", link: "/product/edit" },
+  ];
+
   return (
     <div>
-      {/* <Typography variant="h4" color="initial"></Typography> */}
-      <ProductsEditAdd id={data.id} products={products} setProducts={setProducts} />
+      <MyBreadCrumbs link={link} />
+      <ProductsEditAdd
+        id={data.id}
+        products={products}
+        setProducts={setProducts}
+      />
     </div>
   );
 }

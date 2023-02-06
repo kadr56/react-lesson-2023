@@ -39,7 +39,9 @@ export default function ProductsEditAdd({ id, products, setProducts }) {
     if (id) {
       setIsUpdate(true);
       console.log("Edit product");
-      const filteredProduct = products.filter((product) => product.id === id)[0];
+      const filteredProduct = products.filter(
+        (product) => product.id === id
+      )[0];
 
       // const filteredProduct = products.filter((product) => {
       //   if (product.id === id) {
@@ -126,12 +128,10 @@ export default function ProductsEditAdd({ id, products, setProducts }) {
         quantity: currentProduct.quantity,
         size: currentProduct.size,
         color: currentProduct.color,
-        categery: currentProduct.categery,
+        category: currentProduct.category,
         description: currentProduct.description,
-
-
       };
-      console.log(putData, "putdata")
+      console.log(putData, "putdata");
       const options = {
         method: "PUT",
         headers: {
@@ -143,7 +143,7 @@ export default function ProductsEditAdd({ id, products, setProducts }) {
       const FETCHED_DATA = await fetch(URL, options);
       const FETCHED_JSON = await FETCHED_DATA.json();
       setProducts(FETCHED_JSON.data);
-      console.log(FETCHED_JSON.data, "FETCHED JSON")
+      console.log(FETCHED_JSON.data, "FETCHED JSON");
       setIsUpdate(false);
       setCurrentProduct(newProduct);
     }
@@ -154,7 +154,9 @@ export default function ProductsEditAdd({ id, products, setProducts }) {
     console.log("edit");
     setIsUpdate(true);
 
-    const filteredProduct = products.filter((product) => product.id === productId)[0];
+    const filteredProduct = products.filter(
+      (product) => product.id === productId
+    )[0];
     if (filteredProduct) {
       setCurrentProduct({
         ...currentProduct,
@@ -184,7 +186,6 @@ export default function ProductsEditAdd({ id, products, setProducts }) {
       price: e.target.value,
     });
   }
-
 
   function handleImage(e) {
     setCurrentProduct({
@@ -228,8 +229,6 @@ export default function ProductsEditAdd({ id, products, setProducts }) {
     });
   }
 
-
-
   function handleReset() {
     console.log("Reset button clicked");
   }
@@ -240,11 +239,10 @@ export default function ProductsEditAdd({ id, products, setProducts }) {
 
   return (
     <div style={{ width: "100%" }}>
-      <Typography variant="h5" color="initial" sx={{ mb: 2 }}>
-
-        {isUpdate ? "Edit product" : "Add Product"}
-      </Typography>
       <form onSubmit={handleSubmit}>
+        <Typography variant="h5" color="initial" sx={{ mb: 2 }}>
+          {isUpdate ? "Edit product" : "Add Product"}
+        </Typography>
         <Box
           sx={{
             width: 600,
@@ -280,8 +278,6 @@ export default function ProductsEditAdd({ id, products, setProducts }) {
             value={currentProduct.price}
             onChange={handlePrice}
           />
-
-
 
           <TextField
             id="outlined-basic"
@@ -327,7 +323,6 @@ export default function ProductsEditAdd({ id, products, setProducts }) {
             value={currentProduct.description}
             onChange={handleDescription}
           />
-
 
           <Box sx={{ display: "flex", gap: 3 }}>
             <Button variant="contained" type="submit">

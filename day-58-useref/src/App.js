@@ -3,13 +3,18 @@ import "./App.css";
 import { useContext, useState } from "react";
 import List from "./components/List";
 import { PlaceContext, PlaceProvider } from "./contexts/PlaceContext";
+import StopWatch from "./components/StopWatch";
 
 function App() {
   const [isLarge, setIsLarge, imageSize] = useContext(PlaceContext);
 
   return (
     <div className="App">
-      <label>
+      <h1>Day-58 - useRef hook</h1>
+
+      <StopWatch />
+
+      {/* <label>
         <input
           type="checkbox"
           checked={isLarge}
@@ -19,7 +24,7 @@ function App() {
       </label>
       <hr />
 
-      <List />
+      <List /> */}
     </div>
   );
 }

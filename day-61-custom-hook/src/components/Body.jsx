@@ -18,6 +18,7 @@ export default function Body() {
   return (
     <div className={styleClass}>
       <p>Body</p>
+      {/* test */}
       {response.message && <img src={response.message} alt="Dog image" />}
     </div>
   );

@@ -1,1 +1,34 @@
-[{"firstname":"Munkhbaatar","lastname":"Shagdarsuren","email":"sh.munkhbaatar@gmail.com","password":"testPassword","address":"adress","role":{"id":2,"name":"User"}}]
+[
+  {
+    "firstname": "Dorj2",
+    "lastname": "23",
+    "email": "dsffdsfsfs@gm.",
+    "password": "$2b$10$CvjeCWewB1FCC.GZbp7Tu.1NAzQORs/EK7qqi5PYjGIrTGnqEuF9O",
+    "address": "adress",
+    "role": { "id": 3, "name": "Customer" }
+  },
+  {
+    "firstname": "Munkhbaatar",
+    "lastname": "Shagdarsuren",
+    "email": "sh.munkhbaatar@gmail.com",
+    "password": "$2b$10$6DEafKK1mJV6n1zSLwOzqOlS/NooWN8R94mqmg4LAhAGMdYd2Okve",
+    "address": "adress",
+    "role": { "id": 3, "name": "Customer" }
+  },
+  {
+    "firstname": "Munkhbaatar",
+    "lastname": "Shagdarsuren",
+    "email": "sh.munkhbaatar@gmail.com",
+    "password": "$2b$10$ntI4YEf37tFHDxVmn9I7Gutuw95A/okBcVWnWRXxHOxmTLrEOC.d6",
+    "address": "adress",
+    "role": { "id": 3, "name": "Customer" }
+  },
+  {
+    "firstname": "Dorj2",
+    "lastname": "23",
+    "email": "sh.@",
+    "password": "$2b$10$qOhaA6swdprBP/8JIZ7RZuF3K8ekkfmB3gXr9FEayxPkoi4aweXpi",
+    "address": "adress",
+    "role": { "id": 3, "name": "Customer" }
+  }
+]

@@ -35,6 +35,9 @@ import { useState } from "react";
 import ProductList from "../pages/ProductList";
 import ProductAdd from "../pages/ProductAdd";
 import ProductEdit from "../pages/ProductEdit";
+import CategoryList from "../pages/CategoryList";
+import CategoryAdd from "../pages/CategoryAdd";
+import CategoryEdit from "../pages/CategoryEdit";
 
 const drawerWidth = 240;
 
@@ -42,6 +45,7 @@ export default function Home() {
   const [open, setOpen] = React.useState(true);
   const [users, setUsers] = useState([]);
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   const handleClick = () => {
     setOpen(!open);
@@ -121,6 +125,31 @@ export default function Home() {
               </List>
             </Collapse>
 
+            {/* Category */}
+            <ListItemButton onClick={handleClick}>
+              <ListItemIcon>
+                <ShoppingCartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Category" />
+              {open ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItemButton sx={{ pl: 4 }} to="/category/list">
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary="Category List" />
+                </ListItemButton>
+                <ListItemButton sx={{ pl: 4 }} to="/category/add">
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary="Category Add" />
+                </ListItemButton>
+              </List>
+            </Collapse>
+
             {/* Users */}
             <ListItemButton onClick={handleClick}>
               <ListItemIcon>
@@ -159,24 +188,13 @@ export default function Home() {
           </List>
 
           <Divider />
-          {/* <List>
-            {["All mail", "Trash", "Spam"].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List> */}
         </Box>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
 
         <Routes>
+          {/* user */}
           <Route
             path="/user/list"
             element={<UserList users={users} setUsers={setUsers} />}
@@ -190,6 +208,37 @@ export default function Home() {
             element={<UserEdit users={users} setUsers={setUsers} />}
           ></Route>
 
+          {/* category */}
+          <Route
+            path="/category/list"
+            element={
+              <CategoryList
+                categories={categories}
+                setCategories={setCategories}
+              />
+            }
+          ></Route>
+          <Route
+            path="/category/add"
+            element={
+              <CategoryAdd
+                categories={categories}
+                setCategories={setCategories}
+              />
+            }
+          ></Route>
+
+          <Route
+            path="/category/edit/:id"
+            element={
+              <CategoryEdit
+                categories={categories}
+                setCategories={setCategories}
+              />
+            }
+          ></Route>
+
+          {/* Product */}
           <Route
             path="/product/list"
             element={

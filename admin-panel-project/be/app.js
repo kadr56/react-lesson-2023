@@ -8,6 +8,7 @@ const fs = require("fs");
 // config of modules
 const app = express();
 const PORT = 8080;
+const {uuid} = require('uuidv4')
 
 app.use(cors());
 app.use(express.json());
@@ -312,6 +313,22 @@ app.put("/users", (request, response) => {
     );
   });
 });
+
+
+// category modification
+app.route("/categories")
+.post((request, response) => {
+
+  const body = request.body
+  console.log(body)
+
+
+  response.json({
+    status : "success",
+    data: []
+  })
+})
+
 
 
 app.listen(PORT, () => {

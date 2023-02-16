@@ -4,14 +4,7 @@ import { Box, Stack } from "@mui/system";
 import { Button, Typography } from "@mui/material";
 import { TextField } from "@mui/material";
 import * as React from "react";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
 
-import FormGroup from "@mui/material/FormGroup";
-import Checkbox from "@mui/material/Checkbox";
 import { useNavigate } from "react-router-dom";
 
 export default function ProductsEditAdd({ id, products, setProducts }) {
@@ -86,14 +79,6 @@ export default function ProductsEditAdd({ id, products, setProducts }) {
     console.log("Save button clicked");
 
     e.preventDefault();
-
-    console.log(" name: " + e.target.name.value);
-    console.log(" price: " + e.target.price.value);
-    console.log(" image: " + e.target.image.value);
-    console.log(" quantity: " + e.target.quantity.value);
-    // console.log(" role: " + e.target.role.value);
-    // console.log(" disabled: " + e.target.disabled.value);
-    // console.log(" password: " + e.target.password.value);
 
     if (!isUpdate) {
       const postData = {

@@ -38,9 +38,6 @@ import ProductEdit from "../pages/ProductEdit";
 import CategoryList from "../pages/CategoryList";
 import CategoryAdd from "../pages/CategoryAdd";
 import CategoryEdit from "../pages/CategoryEdit";
-import UserRoleList from "../pages/UserRoleList";
-import UserRoleAdd from "../pages/UserRoleAdd";
-import UserRoleEdit from "../pages/UserRoleEdit";
 
 const drawerWidth = 240;
 
@@ -49,7 +46,6 @@ export default function Home() {
   const [users, setUsers] = useState([]);
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [userRole, setUserRole] = useState([]);
 
   const handleClick = () => {
     setOpen(!open);
@@ -179,21 +175,6 @@ export default function Home() {
                   </ListItemIcon>
                   <ListItemText primary="User Add" />
                 </ListItemButton>
-
-                <ListItemButton sx={{ pl: 4 }} to="/userRole/list">
-                  <ListItemIcon>
-                    <StarBorder />
-                  </ListItemIcon>
-                  <ListItemText primary="User Role list" />
-                </ListItemButton>
-                {/* </Link> */}
-
-                <ListItemButton sx={{ pl: 4 }} to="/userRole/add">
-                  <ListItemIcon>
-                    <StarBorder />
-                  </ListItemIcon>
-                  <ListItemText primary="User Role Add" />
-                </ListItemButton>
               </List>
             </Collapse>
 
@@ -225,26 +206,6 @@ export default function Home() {
           <Route
             path="/user/edit/:id"
             element={<UserEdit users={users} setUsers={setUsers} />}
-          ></Route>
-
-          {/* user Role */}
-          <Route
-            path="/userRole/list"
-            element={
-              <UserRoleList userRole={userRole} setUserRole={setUserRole} />
-            }
-          ></Route>
-          <Route
-            path="/userRole/add"
-            element={
-              <UserRoleAdd userRole={userRole} setUserRole={setUserRole} />
-            }
-          ></Route>
-          <Route
-            path="/userRole/edit/:id"
-            element={
-              <UserRoleEdit userRole={userRole} setUserRole={setUserRole} />
-            }
           ></Route>
 
           {/* category */}

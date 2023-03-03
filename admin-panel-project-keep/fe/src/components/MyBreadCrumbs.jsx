@@ -9,19 +9,15 @@ function handleClick(event) {
 }
 
 export default function MyBreadCrumbs({ link }) {
-  // console.log(link);
+  console.log(link);
   return (
     <Breadcrumbs aria-label="breadcrumb">
       {link.map((a, index) => {
         if (link.length == index + 1) {
-          return (
-            <Typography key={index} color="text.primary">
-              {a.linkName}
-            </Typography>
-          );
+          return <Typography color="text.primary">{a.linkName}</Typography>;
         } else {
           return (
-            <Link underline="hover" key={index} color="inherit" href={a.link}>
+            <Link underline="hover" color="inherit" href={a.link}>
               {a.linkName}
             </Link>
           );

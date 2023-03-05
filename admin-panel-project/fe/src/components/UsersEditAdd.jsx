@@ -81,9 +81,6 @@ export default function UsersEditAdd({ id, users, setUsers }) {
     console.log(" lastname: " + e.target.lastname.value);
     console.log(" phonenumber: " + e.target.phonenumber.value);
     console.log(" email: " + e.target.email.value);
-    // console.log(" role: " + e.target.role.value);
-    // console.log(" disabled: " + e.target.disabled.value);
-    // console.log(" password: " + e.target.password.value);
 
     if (!isUpdate) {
       const postData = {

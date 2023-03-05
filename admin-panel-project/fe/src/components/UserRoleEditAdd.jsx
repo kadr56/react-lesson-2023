@@ -131,9 +131,7 @@ export default function UserRoleEditAdd({ id, userRole, setUserRole }) {
     console.log("edit");
     setIsUpdate(true);
 
-    const filteredUserRole = userRole.filter(
-      (userRole) => userRole.id === userId
-    )[0];
+    const filteredUserRole = userRole.filter((role) => role.id === userId)[0];
     if (filteredUserRole) {
       setCurrentUserRole({
         ...currentUserRole,
@@ -165,7 +163,7 @@ export default function UserRoleEditAdd({ id, userRole, setUserRole }) {
     <div style={{ width: "100%" }}>
       <form onSubmit={handleSubmit}>
         <Typography variant="h5" color="initial" sx={{ mb: 2 }}>
-          {isUpdate ? "Edit userRole" : "Add userRole"}
+          {isUpdate ? "Edit user role" : "Add user role"}
         </Typography>
         <Box
           sx={{

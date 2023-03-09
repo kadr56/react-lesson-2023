@@ -19,8 +19,11 @@ user_role_router.get("/userRole", async (request, response) => {
 user_role_router.post("/userRole", async (request, response) => {
   const { roleName } = request.body;
   const result = await addUserRole(roleName);
+  const getUsers = await getUserRole()
   console.log(result);
-  response.status(200).send(result);
+  console.log(getUsers);
+
+  response.status(200).send(getUsers);
 });
 
 // Update user_role

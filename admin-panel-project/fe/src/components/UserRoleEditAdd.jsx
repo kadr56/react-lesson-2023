@@ -27,14 +27,12 @@ export default function UserRoleEditAdd({ id, userRole, setUserRole }) {
 
   useEffect(() => {
     fetchAllData();
-    // console.log(id);
+    console.log(id);
     console.log(userRole, "userRole ===");
     if (id) {
       setIsUpdate(true);
       console.log("Edit userRole");
-      const filteredUserRole = userRole.filter(
-        (userRole) => userRole.id === id
-      )[0];
+      const filteredUserRole = userRole.filter((role) => role.id === id)[0];
 
       // const filteredUserRole = userRole.filter((userRole) => {
       //   if (userRole.id === id) {
@@ -65,7 +63,8 @@ export default function UserRoleEditAdd({ id, userRole, setUserRole }) {
     // fetch a data from localhost: 8080/userRole
     const FETCHED_DATA = await fetch(URL); //reponse
     const FETCHED_JSON = await FETCHED_DATA.json(); // {status: 'success', data: {{id: ....}}}
-    setUserRole(FETCHED_JSON.data);
+    console.log(FETCHED_JSON, "at line 68 FETCHED JSON =");
+    setUserRole(FETCHED_JSON);
     console.log("Fetch userRole");
     // console.log(FETCHED_JSON.data);
     // console.log(userRole);
@@ -85,6 +84,7 @@ export default function UserRoleEditAdd({ id, userRole, setUserRole }) {
     // console.log(" password: " + e.target.password.value);
 
     if (!isUpdate) {
+      console.log("create new User role");
       const postData = {
         roleName: e.target.roleName.value,
       };
@@ -99,7 +99,9 @@ export default function UserRoleEditAdd({ id, userRole, setUserRole }) {
 
       const FETCHED_DATA = await fetch(URL, options);
       const FETCHED_JSON = await FETCHED_DATA.json();
-      setUserRole(FETCHED_JSON.data);
+      console.log(FETCHED_JSON);
+      setUserRole(FETCHED_JSON);
+      console.log(userRole);
     } else {
       console.log("sending update");
       const putData = {
@@ -117,8 +119,8 @@ export default function UserRoleEditAdd({ id, userRole, setUserRole }) {
 
       const FETCHED_DATA = await fetch(URL, options);
       const FETCHED_JSON = await FETCHED_DATA.json();
-      setUserRole(FETCHED_JSON.data);
-      console.log(FETCHED_JSON.data, "FETCHED JSON");
+      setUserRole(FETCHED_JSON);
+      console.log(FETCHED_JSON, "FETCHED JSON");
       setIsUpdate(false);
       setCurrentUserRole(newUserRole);
     }
@@ -129,9 +131,7 @@ export default function UserRoleEditAdd({ id, userRole, setUserRole }) {
     console.log("edit");
     setIsUpdate(true);
 
-    const filteredUserRole = userRole.filter(
-      (userRole) => userRole.id === userId
-    )[0];
+    const filteredUserRole = userRole.filter((role) => role.id === userId)[0];
     if (filteredUserRole) {
       setCurrentUserRole({
         ...currentUserRole,
@@ -163,7 +163,7 @@ export default function UserRoleEditAdd({ id, userRole, setUserRole }) {
     <div style={{ width: "100%" }}>
       <form onSubmit={handleSubmit}>
         <Typography variant="h5" color="initial" sx={{ mb: 2 }}>
-          {isUpdate ? "Edit userRole" : "Add userRole"}
+          {isUpdate ? "Edit user role" : "Add user role"}
         </Typography>
         <Box
           sx={{

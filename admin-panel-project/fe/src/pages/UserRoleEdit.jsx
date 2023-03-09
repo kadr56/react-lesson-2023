@@ -6,8 +6,8 @@ import MyBreadCrumbs from "../components/MyBreadCrumbs";
 export default function UserEdit({ users, setUsers }) {
   const link = [
     { linkName: "User", link: "/" },
-    { linkName: "User List ", link: "/user/list" },
-    { linkName: "Edit User ", link: "/user/edit" },
+    { linkName: "User Role List ", link: "/userRole/list" },
+    { linkName: "Edit User Role ", link: "/userRole/edit" },
   ];
 
   const data = useParams();

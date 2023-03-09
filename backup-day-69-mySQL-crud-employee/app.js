@@ -1,17 +1,14 @@
 console.log("Day - 69");
 import express from "express";
-// import emp_router from "./routes/api.js";
-import apiRouter from "./routes/api.js";
+import emp_router from "./routes/api.js";
 import admin from "./routes/admin.js";
-import cors from "cors";
 
 // import employee_routes from "./routes/employees";
 
 const app = express();
 app.use(express.json());
-app.use(cors());
 app.use("/admin", admin);
-app.use("/api", apiRouter);
+app.use("/api", emp_router);
 
 const PORT = 8080;
 

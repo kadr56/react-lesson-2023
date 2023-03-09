@@ -8,6 +8,8 @@ import {
   updateEmployee,
 } from "../services/employee-services.js";
 
+import { getPopularCategories } from "../services/category-services.js.js";
+
 emp_router.get("/employees", async (request, response) => {
   const result = await getEmployees();
   console.log(result);

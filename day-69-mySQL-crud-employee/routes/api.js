@@ -4,11 +4,24 @@ import {
   getChildrenMenus,
   getParentMenus,
 } from "../services/menus-services.js";
+import { search, getAllProducts } from "../services/product-service.js";
 const apiRouter = express.Router();
 
 apiRouter.get("/popular", async (request, response) => {
   const result = await getPopularCategory();
   console.log(result);
+  response.status(200).send(result);
+});
+
+apiRouter.get("/products", async (request, response) => {
+  const result = await getAllProducts();
+  response.status(200).send(result);
+});
+
+apiRouter.get("/search", async (request, response) => {
+  const keyword = request.query.keyword;
+  const result = await search(keyword);
+  // console.log(result);
   response.status(200).send(result);
 });
 
